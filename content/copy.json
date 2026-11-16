@@ -1,0 +1,386 @@
+{
+  "site": {
+    "name": "Les Aliments Joe & Ray",
+    "legal": "Les Aliments Joe & Ray Ltée",
+    "founded": "1954",
+    "street": "6506 P.E. Lamarche",
+    "city": "St-Léonard",
+    "region": "QC",
+    "postal": "H1P 1J4",
+    "phone_main": "514.729.6470",
+    "phone_alt": "514.376.2109",
+    "fax": "514.376.9167",
+    "map_url": "https://www.google.com/maps/search/?api=1&query=6506+Rue+P.E.+Lamarche+Saint-L%C3%A9onard+QC+H1P+1J4",
+    "url": "https://alimentsjoeandray.com",
+    "form_endpoint": "https://formspree.io/f/YOUR_FORM_ID",
+    "_form_endpoint_todo": "PLACEHOLDER. Replace YOUR_FORM_ID with the real Formspree form ID before launch. While the placeholder is here, the form only simulates a successful send (nothing is delivered)."
+  },
+
+  "meta": {
+    "title": {
+      "en": "Les Aliments Joe & Ray | Food importer & distributor since 1954",
+      "fr": "Les Aliments Joe & Ray | Importateur et distributeur alimentaire depuis 1954"
+    },
+    "description": {
+      "en": "Family-owned importer and distributor in Saint-Léonard serving restaurants, pizzerias, caterers and retailers across Quebec with 2,000+ products. CFIA-licensed.",
+      "fr": "Importateur et distributeur familial à Saint-Léonard au service des restaurants, pizzerias, traiteurs et détaillants du Québec. Plus de 2 000 produits. Licence de l’ACIA."
+    },
+    "catalogue_title": {
+      "en": "Product catalogue | Les Aliments Joe & Ray",
+      "fr": "Catalogue de produits | Les Aliments Joe & Ray"
+    },
+    "catalogue_description": {
+      "en": "Search our wholesale catalogue by product name or item code: cheeses, deli meats, pizza essentials, packaging and more.",
+      "fr": "Cherchez dans notre catalogue de gros par nom de produit ou code d’article : fromages, charcuteries, essentiels pour pizzeria, emballages et plus."
+    }
+  },
+
+  "nav": {
+    "services": { "en": "Services", "fr": "Services" },
+    "about": { "en": "Our story", "fr": "Notre histoire" },
+    "products": { "en": "Products", "fr": "Produits" },
+    "testimonials": { "en": "Clients", "fr": "Clients" },
+    "faq": { "en": "FAQ", "fr": "FAQ" },
+    "catalogue": { "en": "Catalogue", "fr": "Catalogue" },
+    "contact": { "en": "Contact us", "fr": "Nous joindre" },
+    "menu": { "en": "Menu", "fr": "Menu" },
+    "close": { "en": "Close", "fr": "Fermer" },
+    "skip": { "en": "Skip to content", "fr": "Passer au contenu" },
+    "switch_lang": { "en": "Français", "fr": "English" }
+  },
+
+  "hero": {
+    "eyebrow": { "en": "Importer & distributor · Saint-Léonard, QC", "fr": "Importateur et distributeur · Saint-Léonard, QC" },
+    "title": { "en": "Stocking Quebec’s kitchens since 1954.", "fr": "Les cuisines du Québec, approvisionnées depuis 1954." },
+    "lead": {
+      "en": "Imported cheeses, deli meats, pizza essentials and everything in between, delivered to restaurants, pizzerias and retailers across Quebec.",
+      "fr": "Fromages importés, charcuteries, essentiels pour pizzeria et tout le reste, livrés aux restaurants, pizzerias et détaillants partout au Québec."
+    },
+    "search_placeholder": { "en": "Search {count} products", "fr": "Chercher parmi {count} produits" },
+    "search_button": { "en": "Search", "fr": "Chercher" },
+    "search_hints": { "en": "Burrata|Pepperoni|Pizza boxes|Olive oil", "fr": "Burrata|Pepperoni|Boîtes à pizza|Huile d’olive" },
+    "cta_pricing": { "en": "Request wholesale pricing", "fr": "Demander nos prix de gros" },
+    "image_alt": { "en": "Pepperoni pizza being shared from a delivery box", "fr": "Pizza au pepperoni servie dans sa boîte" },
+    "seal_alt": { "en": "Les Aliments Joe & Ray, 70 years", "fr": "Les Aliments Joe & Ray, 70 ans" }
+  },
+
+  "marquee": {
+    "en": "Formaggi|Salumi|Pomodori|Olio d’oliva|Aceto|Pasta|Pizza|Dolci",
+    "fr": "Formaggi|Salumi|Pomodori|Olio d’oliva|Aceto|Pasta|Pizza|Dolci"
+  },
+
+  "stats": {
+    "founded": { "en": "Family-owned since", "fr": "Entreprise familiale depuis" },
+    "generations_value": { "en": "3rd", "fr": "3e" },
+    "generations": { "en": "generation at the helm", "fr": "génération à la barre" },
+    "products_value": { "en": "2,000+", "fr": "2 000+" },
+    "products": { "en": "products in stock", "fr": "produits en stock" },
+    "delivery_value": { "en": "1–2 days", "fr": "1 à 2 jours" },
+    "delivery": { "en": "typical delivery", "fr": "délai de livraison habituel" }
+  },
+
+  "intro": {
+    "eyebrow": { "en": "Importing & distributing since 1954", "fr": "Importation et distribution depuis 1954" },
+    "title": { "en": "Specialty foods for your menu and your shelves.", "fr": "Des produits pour votre menu et vos rayons." },
+    "body": {
+      "en": "We supply restaurants, pizzerias, caterers and retailers with imported cheeses, pizza tomatoes, oils, vinegars and Italian specialties, plus the packaging and sanitation products that keep a kitchen running.",
+      "fr": "Nous approvisionnons les restaurants, pizzerias, traiteurs et détaillants en fromages importés, tomates pour la pizza, huiles, vinaigres et spécialités italiennes, ainsi qu’en emballages et produits d’entretien."
+    },
+    "image_alt": { "en": "Margherita pizza with fresh mozzarella, basil and tomato sauce", "fr": "Pizza margherita, mozzarella fraîche, basilic et sauce tomate" }
+  },
+
+  "eva": {
+    "status": { "en": "Coming soon", "fr": "Bientôt" },
+    "title": { "en": "Acqua eVa Premium", "fr": "Acqua eVa Premium" },
+    "tagline": { "en": "Italy, at your table.", "fr": "L’Italie, à votre table." },
+    "body": {
+      "en": "Italian natural mineral water in a glass bottle with a sculpted mountain base, made to stand out on the table. Exclusive in Canada through Joe & Ray.",
+      "fr": "Une eau minérale naturelle italienne dans une bouteille de verre au fond sculpté en montagne, faite pour se démarquer à table. En exclusivité au Canada chez Joe & Ray."
+    },
+    "format": { "en": "750 mL glass", "fr": "Verre 750 mL" },
+    "case": { "en": "12 per case", "fr": "12 par caisse" },
+    "still": { "en": "Still", "fr": "Plate" },
+    "still_when": { "en": "Expected Dec. 2026", "fr": "Prévue déc. 2026" },
+    "sparkling": { "en": "Sparkling", "fr": "Gazéifiée" },
+    "sparkling_when": { "en": "Later · date to come", "fr": "Plus tard · date à venir" },
+    "note": {
+      "en": "Arrival dates are subject to change. Delivery timing is confirmed once stock is received.",
+      "fr": "Les dates d’arrivée peuvent changer. Les délais de livraison sont confirmés à la réception."
+    },
+    "cta": { "en": "Reserve still water", "fr": "Réserver l’eau plate" },
+    "image_alt": {
+      "en": "Acqua eVa Premium 750 mL still (white cap) and sparkling (black cap) glass bottles",
+      "fr": "Bouteilles de verre Acqua eVa Premium 750 mL, plate (bouchon blanc) et gazéifiée (bouchon noir)"
+    },
+    "prefill": { "en": "I'd like pricing and availability for Acqua eVa still water.", "fr": "J’aimerais connaître le prix et la disponibilité de l’eau plate Acqua eVa." }
+  },
+
+  "services": {
+    "eyebrow": { "en": "What we do", "fr": "Ce que nous faisons" },
+    "title": { "en": "One supplier for the whole kitchen.", "fr": "Un seul fournisseur pour toute la cuisine." },
+    "items": [
+      {
+        "icon": "truck",
+        "title": { "en": "Food distribution", "fr": "Distribution alimentaire" },
+        "body": {
+          "en": "Over 2,000 products: local and imported deli meats, cheeses and the kitchen essentials you reorder every week.",
+          "fr": "Plus de 2 000 produits : charcuteries locales et importées, fromages et les essentiels de cuisine que vous commandez chaque semaine."
+        }
+      },
+      {
+        "icon": "sparkle",
+        "title": { "en": "Custom sourcing", "fr": "Approvisionnement sur mesure" },
+        "body": {
+          "en": "Looking for something specific? We work with our suppliers to bring in specialty items for your menu.",
+          "fr": "Vous cherchez un produit précis? Nous travaillons avec nos fournisseurs pour trouver les spécialités de votre menu."
+        }
+      },
+      {
+        "icon": "shield",
+        "title": { "en": "Food safety & compliance", "fr": "Sécurité alimentaire et conformité" },
+        "body": {
+          "en": "CFIA import licence, recall programs and arrival controls on every product we receive.",
+          "fr": "Licence d’importation de l’ACIA, programmes de rappel et contrôles à l’arrivée de chaque produit."
+        }
+      },
+      {
+        "icon": "warehouse",
+        "title": { "en": "Logistics & warehousing", "fr": "Logistique et entreposage" },
+        "body": {
+          "en": "Storage and delivery planned around your service, including recurring orders.",
+          "fr": "Entreposage et livraison planifiés selon votre service, incluant les commandes récurrentes."
+        }
+      }
+    ]
+  },
+
+  "about": {
+    "eyebrow": { "en": "Our story", "fr": "Notre histoire" },
+    "title": { "en": "Three generations. It started with pepperoni.", "fr": "Trois générations. Tout a commencé avec du pepperoni." },
+    "image_alt": {
+      "en": "Archive photos of the original Joe & Ray delivery vans, next to today’s warehouse team",
+      "fr": "Photos d’archives des premières camionnettes Joe & Ray, à côté de l’équipe d’entrepôt d’aujourd’hui"
+    },
+    "steps": [
+      {
+        "when": { "en": "1954", "fr": "1954" },
+        "body": {
+          "en": "Giuseppe “Joe” and Raymond “Ray” Teolis start delivering fresh pepperoni to neighbourhood pizzerias.",
+          "fr": "Giuseppe « Joe » et Raymond « Ray » Teolis commencent à livrer du pepperoni frais aux pizzerias du quartier."
+        }
+      },
+      {
+        "when": { "en": "Growing", "fr": "La croissance" },
+        "body": {
+          "en": "As our customers’ kitchens grew, so did the selection: deli meats, imported cheeses, Italian specialties.",
+          "fr": "Au rythme de nos clients, la gamme s’élargit : charcuteries, fromages importés, spécialités italiennes."
+        }
+      },
+      {
+        "when": { "en": "Today", "fr": "Aujourd’hui" },
+        "body": {
+          "en": "The third generation carries on in Saint-Léonard, with the same care for the products and the people who serve them.",
+          "fr": "La troisième génération poursuit le travail à Saint-Léonard, avec le même soin pour les produits et les gens qui les servent."
+        }
+      }
+    ]
+  },
+
+  "brands": {
+    "title": { "en": "Partnering with brands our clients trust.", "fr": "Partenaires de marques en qui nos clients ont confiance." },
+    "items": [
+      { "name": "Aliments Roma", "logo": "clogo17.jpg", "url": "https://alimentsroma.com/" },
+      { "name": "Saputo", "logo": "clogo1.jpg", "url": "https://saputo.com/" },
+      { "name": "Olymel", "logo": "clogo3.jpg", "url": "https://www.olymel.ca/fr/" },
+      { "name": "Rosehill Foods", "logo": "clogo12.jpg", "url": "https://www.rosehillfoods.com/home.html" },
+      { "name": "Kamateros", "logo": "clogo14.jpg", "url": "https://groupkamateros.com/" },
+      { "name": "Barilla", "logo": "clogo8.jpg", "url": "https://www.barilla.com/en-ca" },
+      { "name": "Griss", "logo": "clogo5.jpg", "url": "https://www.grisspasta.com/home.html" },
+      { "name": "Daboom Desserts", "logo": "clogo16.jpg", "url": "https://daboomdesserts.com/" },
+      { "name": "Boulangerie L’Épicurien", "logo": "clogo6.jpg", "url": "https://boulangerielepicurien.com/" },
+      { "name": "Zarpellon", "logo": "clogo9.jpg", "url": "https://zarpellon.it/" },
+      { "name": "Coppini", "logo": "clogo15.jpg", "url": "https://www.coppini.com/en/" },
+      { "name": "Acetificio Andrea Milano", "logo": "clogo11.jpg", "url": "https://www.acetomilano.it/en/" },
+      { "name": "Lester’s", "logo": "clogo10.jpg", "url": "https://lesters.ca/en/" },
+      { "name": "Mitchell", "logo": "clogo4-1.jpg", "url": "https://www.mitchellincoln.ca/" },
+      { "name": "High Liner", "logo": "clogo13.jpg", "url": "https://www.highlinerfoodservice.com/" },
+      { "name": "Livabec", "logo": "clogo2.jpg", "url": "https://www.livabec.ca/" },
+      { "name": "Vinsar", "logo": "clogo7.jpg", "url": "https://www.vinsar.ca/" },
+      { "name": "Maple Leaf", "logo": "maple_leaf.jpg", "url": "https://www.mapleleaffoods.com/" },
+      { "name": "Viau", "logo": "viau.jpg", "url": "https://viaufoods.com/en/" }
+    ]
+  },
+
+  "products": {
+    "eyebrow": { "en": "On our shelves", "fr": "Sur nos tablettes" },
+    "title": { "en": "A few favourites, best-sellers and specialties.", "fr": "Quelques favoris, meilleurs vendeurs et spécialités." },
+    "all": { "en": "See the full catalogue", "fr": "Voir tout le catalogue" },
+    "prev": { "en": "Previous", "fr": "Précédent" },
+    "next": { "en": "Next", "fr": "Suivant" },
+    "items": [
+      { "img": "parmigiano-reggiano.jpg", "q": "parmigiano", "name": { "en": "Parmigiano Reggiano", "fr": "Parmigiano Reggiano" }, "origin": { "en": "Cheese", "fr": "Fromage" } },
+      { "img": "pecorino-mannoni.jpg", "q": "pecorino", "name": { "en": "Pecorino Mannoni", "fr": "Pecorino Mannoni" }, "origin": { "en": "Cheese", "fr": "Fromage" } },
+      { "img": "burrata.jpg", "q": "burrata", "name": { "en": "Burrata", "fr": "Burrata" }, "origin": { "en": "Cheese", "fr": "Fromage" } },
+      { "img": "provolone-piccante.jpg", "q": "provolone", "name": { "en": "Provolone piccante", "fr": "Provolone piquant" }, "origin": { "en": "Cheese", "fr": "Fromage" } },
+      { "img": "coppini-olive-oil.jpg", "q": "coppini", "name": { "en": "Coppini olive oil", "fr": "Huile d’olive Coppini" }, "origin": { "en": "Oils & vinegars", "fr": "Huiles et vinaigres" } },
+      { "img": "andrea-milano-vinegars.jpg", "q": "milano", "name": { "en": "Andrea Milano vinegars", "fr": "Vinaigres Andrea Milano" }, "origin": { "en": "Oils & vinegars", "fr": "Huiles et vinaigres" } },
+      { "img": "la-rosa-pistachio.jpg", "q": "pistach", "name": { "en": "La Rosa pistachio cream", "fr": "Crème de pistache La Rosa" }, "origin": { "en": "Sweet spreads", "fr": "Tartinades" } },
+      { "img": "acqua-eva.jpg", "q": "eva", "name": { "en": "Acqua eVa mineral water", "fr": "Eau minérale Acqua eVa" }, "origin": { "en": "Beverages", "fr": "Boissons" } }
+    ]
+  },
+
+  "testimonials": {
+    "eyebrow": { "en": "Our clients", "fr": "Nos clients" },
+    "title": { "en": "Decades-long partnerships.", "fr": "Des partenariats qui durent." },
+    "items": [
+      {
+        "who": "Milton Safos", "where": "Restaurant L’Avenue", "since": "25+",
+        "quote": {
+          "en": "For over 25 years, Les Aliments Joe & Ray has been a vital partner, providing exceptional service and supporting our R&D. Their dedication has helped grow our franchise locally and internationally.",
+          "fr": "Depuis plus de 25 ans, Les Aliments Joe & Ray sont un partenaire essentiel, offrant un service exceptionnel et soutenant notre R&D. Leur dévouement a aidé à faire croître notre franchise au Québec et à l’international."
+        }
+      },
+      {
+        "who": "George & Peter", "where": "Le Villageois", "since": "1995",
+        "quote": {
+          "en": "Since 1995, Les Aliments Joe & Ray has been our trusted source for fresh, high-quality deli products. Their team is reliable, responsive, and ensures we’re always stocked with essentials.",
+          "fr": "Depuis 1995, Les Aliments Joe & Ray sont notre source fiable pour des viandes et fromages frais et de qualité. Leur équipe veille toujours à ce que nous ne manquions de rien."
+        }
+      },
+      {
+        "who": "Restaurant Brama", "where": "", "since": "2020",
+        "quote": {
+          "en": "Our main supplier since we opened in 2020. The prices are very competitive and the service makes you feel like family.",
+          "fr": "Notre fournisseur principal depuis l’ouverture en 2020. Les prix sont très compétitifs et le service vous fait sentir comme en famille."
+        }
+      },
+      {
+        "who": "Café Solaris", "where": "", "since": "",
+        "quote": {
+          "en": "Unmatched quality and service. As a third-generation business, they excel in providing premium products and valuing customer relationships.",
+          "fr": "Une qualité et un service exceptionnels. Cette entreprise de troisième génération offre des produits de première qualité et valorise la relation client."
+        }
+      },
+      {
+        "who": "Frank Trimarco", "where": "", "since": "",
+        "quote": {
+          "en": "Very friendly staff and their service is pretty amazing! A great selection of products and only the best quality. Would highly recommend.",
+          "fr": "Le personnel est super sympathique et le service est vraiment impressionnant! Une grande sélection de produits, toujours de la meilleure qualité. Je les recommande fortement."
+        }
+      },
+      {
+        "who": "Claudia", "where": "Nine 23 Global Solutions", "since": "",
+        "quote": {
+          "en": "An honour supporting Joe & Ray with their Safe Food for Canadians licensing and supplier certifications. An exceptional importer and distributor, serving Québec for over 70 years.",
+          "fr": "Un honneur d’accompagner Joe & Ray pour leur licence « Aliments salubres pour les Canadiens » et la validation de leurs fournisseurs. Un importateur et distributeur exceptionnel au Québec depuis plus de 70 ans."
+        }
+      }
+    ]
+  },
+
+  "faq": {
+    "eyebrow": { "en": "FAQ", "fr": "FAQ" },
+    "title": { "en": "Questions, answered.", "fr": "Vos questions, nos réponses." },
+    "aside": { "en": "Something else? Talk to a person.", "fr": "Autre chose? Parlez à quelqu’un." },
+    "items": [
+      { "q": { "en": "What areas do you serve?", "fr": "Quelles régions desservez-vous?" },
+        "a": { "en": "We distribute throughout Quebec and surrounding areas.", "fr": "Nous distribuons partout au Québec et dans les régions avoisinantes." } },
+      { "q": { "en": "How do I become a customer?", "fr": "Comment devenir client?" },
+        "a": { "en": "Fill out the contact form below or call us at 514.729.6470. We’ll set up your account and pricing.", "fr": "Remplissez le formulaire ci-dessous ou appelez-nous au 514.729.6470. Nous ouvrirons votre compte et vos prix." } },
+      { "q": { "en": "What is your minimum order?", "fr": "Quel est votre minimum de commande?" },
+        "a": { "en": "$500 for local deliveries.", "fr": "500 $ pour les livraisons locales." } },
+      { "q": { "en": "What are your delivery times?", "fr": "Quels sont vos délais de livraison?" },
+        "a": { "en": "It depends on your location, but we aim for 1–2 business days.", "fr": "Cela dépend de l’emplacement, mais nous visons 1 à 2 jours ouvrables." } },
+      { "q": { "en": "Can I set up recurring orders?", "fr": "Puis-je avoir des commandes récurrentes?" },
+        "a": { "en": "Yes. We offer recurring deliveries on the schedule that suits your kitchen.", "fr": "Oui. Nous offrons des livraisons récurrentes selon l’horaire de votre cuisine." } },
+      { "q": { "en": "Can I place a custom order?", "fr": "Puis-je passer une commande sur mesure?" },
+        "a": { "en": "Yes. We work with our suppliers to source specialty products for your business.", "fr": "Oui. Nous collaborons avec nos fournisseurs pour trouver des produits spécialisés pour votre entreprise." } },
+      { "q": { "en": "What products do you specialize in?", "fr": "Quelles sont vos spécialités?" },
+        "a": { "en": "Deli meats, cheeses and imported specialty foods, mostly Italian.", "fr": "Les charcuteries, les fromages et les produits importés, surtout italiens." } },
+      { "q": { "en": "Do you carry sanitation and paper products?", "fr": "Offrez-vous des produits d’entretien et de papier?" },
+        "a": { "en": "Yes, a wide range of cleaning, packaging and paper products for food businesses.", "fr": "Oui, une large gamme de produits d’entretien, d’emballage et de papier pour les entreprises alimentaires." } },
+      { "q": { "en": "Do you offer food safety programs?", "fr": "Offrez-vous des programmes de sécurité alimentaire?" },
+        "a": { "en": "Yes. We hold a CFIA import licence and run food safety and product recall programs.", "fr": "Oui. Nous détenons une licence d’importation de l’ACIA et appliquons des programmes de sécurité alimentaire et de rappel." } },
+      { "q": { "en": "Are your products locally sourced?", "fr": "Vos produits sont-ils locaux?" },
+        "a": { "en": "We carry a mix of local and imported products to fit your needs.", "fr": "Nous offrons un mélange de produits locaux et importés selon vos besoins." } }
+    ]
+  },
+
+  "contact": {
+    "eyebrow": { "en": "Get in touch", "fr": "Nous joindre" },
+    "title": { "en": "Let’s stock your kitchen.", "fr": "Approvisionnons votre cuisine." },
+    "lead": {
+      "en": "Wholesale pricing, a new account or a product you can’t find. We reply within one business day.",
+      "fr": "Prix de gros, nouveau compte ou produit introuvable. Nous répondons en un jour ouvrable."
+    },
+    "directions": { "en": "Directions", "fr": "Itinéraire" },
+    "fax": { "en": "Fax", "fr": "Téléc." },
+    "name": { "en": "Name", "fr": "Nom" },
+    "company": { "en": "Business name", "fr": "Nom de l’entreprise" },
+    "email": { "en": "Email", "fr": "Courriel" },
+    "phone": { "en": "Phone", "fr": "Téléphone" },
+    "message": { "en": "What do you need?", "fr": "De quoi avez-vous besoin?" },
+    "item_prefix": { "en": "I'd like pricing for", "fr": "J’aimerais un prix pour" },
+    "send": { "en": "Send message", "fr": "Envoyer" },
+    "sending": { "en": "Sending…", "fr": "Envoi…" },
+    "sent_title": { "en": "Message sent.", "fr": "Message envoyé." },
+    "sent_body": { "en": "Thanks! We’ll get back to you within one business day.", "fr": "Merci! Nous vous répondrons d’ici un jour ouvrable." },
+    "again": { "en": "Send another", "fr": "Envoyer un autre" },
+    "error": { "en": "That didn’t go through. Please call us at 514.729.6470.", "fr": "L’envoi a échoué. Appelez-nous au 514.729.6470." }
+  },
+
+  "catalogue": {
+    "eyebrow": { "en": "Product catalogue", "fr": "Catalogue de produits" },
+    "title": { "en": "Find it, then ask us for a price.", "fr": "Trouvez-le, puis demandez-nous un prix." },
+    "lead": {
+      "en": "{count} products across {cats} categories. Search by name or item code. Tap any product to request pricing.",
+      "fr": "{count} produits dans {cats} catégories. Cherchez par nom ou code d’article. Touchez un produit pour demander un prix."
+    },
+    "search": { "en": "Search products or item codes", "fr": "Chercher un produit ou un code" },
+    "all": { "en": "All", "fr": "Tout" },
+    "showing": { "en": "{n} of {total}", "fr": "{n} sur {total}" },
+    "empty_title": { "en": "Nothing matches “{q}”.", "fr": "Aucun résultat pour « {q} »." },
+    "empty_body": {
+      "en": "We may still carry it, or can source it. Ask us.",
+      "fr": "Nous l’avons peut-être quand même, ou pouvons le trouver. Demandez-nous."
+    },
+    "empty_cta": { "en": "Ask about this product", "fr": "Demander ce produit" },
+    "clear": { "en": "Clear search", "fr": "Effacer" },
+    "copy": { "en": "Copy item code", "fr": "Copier le code" },
+    "copied": { "en": "Copied", "fr": "Copié" },
+    "ask": { "en": "Request pricing", "fr": "Demander un prix" },
+    "photos_note": { "en": "Product photos are being added.", "fr": "Les photos des produits s’ajoutent graduellement." },
+    "categories": {
+      "Bakery & dough": { "en": "Bakery & dough", "fr": "Boulangerie et pâtes à pizza" },
+      "Beverages": { "en": "Beverages", "fr": "Boissons" },
+      "Canned & preserved foods": { "en": "Canned & preserved", "fr": "Conserves" },
+      "Cheese": { "en": "Cheese", "fr": "Fromages" },
+      "Cleaning & sanitation": { "en": "Cleaning & sanitation", "fr": "Entretien et hygiène" },
+      "Dairy & eggs": { "en": "Dairy & eggs", "fr": "Produits laitiers et œufs" },
+      "Deli meats & charcuterie": { "en": "Deli meats & charcuterie", "fr": "Charcuteries" },
+      "Desserts & pastry": { "en": "Desserts & pastry", "fr": "Desserts et pâtisseries" },
+      "Dry goods": { "en": "Dry goods", "fr": "Produits secs" },
+      "Fish & seafood": { "en": "Fish & seafood", "fr": "Poissons et fruits de mer" },
+      "Frozen foods": { "en": "Frozen foods", "fr": "Surgelés" },
+      "Frozen potatoes": { "en": "Frozen potatoes", "fr": "Pommes de terre surgelées" },
+      "Meat & poultry": { "en": "Meat & poultry", "fr": "Viandes et volailles" },
+      "Oils & vinegars": { "en": "Oils & vinegars", "fr": "Huiles et vinaigres" },
+      "Packaging & disposables": { "en": "Packaging & disposables", "fr": "Emballages et jetables" },
+      "Pasta, rice & grains": { "en": "Pasta, rice & grains", "fr": "Pâtes, riz et céréales" },
+      "Sauces & condiments": { "en": "Sauces & condiments", "fr": "Sauces et condiments" },
+      "Snacks": { "en": "Snacks", "fr": "Collations" },
+      "Spices & seasonings": { "en": "Spices & seasonings", "fr": "Épices et assaisonnements" },
+      "Spreads, jams & sweet toppings": { "en": "Spreads & sweet toppings", "fr": "Tartinades et garnitures sucrées" }
+    }
+  },
+
+  "footer": {
+    "tagline": {
+      "en": "Family-owned importer and distributor serving Quebec’s restaurants, pizzerias and retailers since 1954.",
+      "fr": "Importateur et distributeur familial au service des restaurants, pizzerias et détaillants du Québec depuis 1954."
+    },
+    "rights": { "en": "All rights reserved.", "fr": "Tous droits réservés." },
+    "explore": { "en": "Explore", "fr": "Explorer" },
+    "reach": { "en": "Reach us", "fr": "Nous joindre" }
+  }
+}
