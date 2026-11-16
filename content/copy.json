@@ -50,7 +50,7 @@
   },
 
   "hero": {
-    "eyebrow": { "en": "Importer & distributor · Saint-Léonard, QC", "fr": "Importateur et distributeur · Saint-Léonard, QC" },
+    "eyebrow": { "en": "Importer & distributor · Saint‑Léonard, QC", "fr": "Importateur et distributeur · Saint‑Léonard, QC" },
     "title": { "en": "Stocking Quebec’s kitchens since 1954.", "fr": "Les cuisines du Québec, approvisionnées depuis 1954." },
     "lead": {
       "en": "Imported cheeses, deli meats, pizza essentials and everything in between, delivered to restaurants, pizzerias and retailers across Quebec.",
