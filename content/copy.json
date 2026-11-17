@@ -12,7 +12,6 @@
     "fax": "514.376.9167",
     "map_url": "https://www.google.com/maps/search/?api=1&query=6506+Rue+P.E.+Lamarche+Saint-L%C3%A9onard+QC+H1P+1J4",
     "url": "https://alimentsjoeandray.com",
-    "google_reviews_url": "https://maps.google.com/?cid=13855158335393402004",
     "form_endpoint": "https://formspree.io/f/YOUR_FORM_ID",
     "_form_endpoint_todo": "PLACEHOLDER. Replace YOUR_FORM_ID with the real Formspree form ID before launch. While the placeholder is here, the form only simulates a successful send (nothing is delivered)."
   },
@@ -36,20 +35,12 @@
     }
   },
 
-  "announce": {
-    "text": { "en": "Coming soon: Acqua eVa Premium still water, exclusively in Canada through Joe & Ray.", "fr": "Bientôt : l’eau plate Acqua eVa Premium, en exclusivité au Canada chez Joe & Ray." },
-    "short": { "en": "Coming soon: Acqua eVa Premium", "fr": "Bientôt : Acqua eVa Premium" },
-    "link": { "en": "Learn more", "fr": "En savoir plus" }
-  },
-
   "nav": {
     "services": { "en": "Services", "fr": "Services" },
     "about": { "en": "Our story", "fr": "Notre histoire" },
     "products": { "en": "Products", "fr": "Produits" },
     "testimonials": { "en": "Clients", "fr": "Clients" },
     "faq": { "en": "FAQ", "fr": "FAQ" },
-    "wholesale": { "en": "Wholesale", "fr": "Vente en gros" },
-    "soon": { "en": "Coming soon", "fr": "Bientôt" },
     "catalogue": { "en": "Catalogue", "fr": "Catalogue" },
     "contact": { "en": "Contact us", "fr": "Nous joindre" },
     "menu": { "en": "Menu", "fr": "Menu" },
@@ -69,8 +60,7 @@
     "search_button": { "en": "Search", "fr": "Chercher" },
     "search_hints": { "en": "Burrata|Pepperoni|Pizza boxes|Olive oil", "fr": "Burrata|Pepperoni|Boîtes à pizza|Huile d’olive" },
     "cta_pricing": { "en": "Request wholesale pricing", "fr": "Demander nos prix de gros" },
-    "cta": { "en": "Browse the catalogue", "fr": "Voir le catalogue" },
-    "image_alt": { "en": "Wheels of Parmigiano Reggiano aging on warehouse shelves", "fr": "Meules de Parmigiano Reggiano en affinage sur les tablettes de l’entrepôt" },
+    "image_alt": { "en": "Pepperoni pizza being shared from a delivery box", "fr": "Pizza au pepperoni servie dans sa boîte" },
     "seal_alt": { "en": "Les Aliments Joe & Ray, 70 years", "fr": "Les Aliments Joe & Ray, 70 ans" }
   },
 
@@ -86,10 +76,7 @@
     "products_value": { "en": "2,000+", "fr": "2 000+" },
     "products": { "en": "products in stock", "fr": "produits en stock" },
     "delivery_value": { "en": "1–2 days", "fr": "1 à 2 jours" },
-    "delivery": { "en": "typical delivery", "fr": "délai de livraison habituel" },
-    "cfia_value": { "en": "CFIA", "fr": "ACIA" },
-    "cfia": { "en": "licensed importer", "fr": "importateur licencié" },
-    "google": { "en": "on Google · {n} reviews", "fr": "sur Google · {n} avis" }
+    "delivery": { "en": "typical delivery", "fr": "délai de livraison habituel" }
   },
 
   "intro": {
@@ -245,18 +232,6 @@
   "testimonials": {
     "eyebrow": { "en": "Our clients", "fr": "Nos clients" },
     "title": { "en": "Decades-long partnerships.", "fr": "Des partenariats qui durent." },
-    "rating": { "en": "{n} Google reviews", "fr": "{n} avis Google" },
-    "google": { "en": "Google review", "fr": "Avis Google" },
-    "prev": { "en": "Previous", "fr": "Précédent" },
-    "next": { "en": "Next", "fr": "Suivant" },
-    "_google_source": "Google Maps listing 'Aliments Jos & Ray Inc' (4.5, 13 reviews), checked 2026-11-17. Only reviews with text, verbatim, in their original language.",
-    "google_score": "4.5",
-    "google_count": 13,
-    "google_items": [
-      { "who": "Rg Vs", "stars": 5, "text": "Been with joe and ray from 1970 dealt with 3 generations of the family. The service is second to none!" },
-      { "who": "Boulangerie Patisserie Via Roma", "stars": 5, "text": "We've been with joe/ Ray for about 5 years without any doubt the best service." },
-      { "who": "Dino Genovesi", "stars": 5, "text": "Best service !!!" }
-    ],
     "items": [
       {
         "who": "Milton Safos", "where": "Restaurant L’Avenue", "since": "25+",
@@ -301,31 +276,6 @@
         }
       }
     ]
-  },
-
-  "wholesale": {
-    "eyebrow": { "en": "Wholesale", "fr": "Vente en gros" },
-    "title": { "en": "Wholesale for food businesses.", "fr": "La vente en gros pour les entreprises alimentaires." },
-    "lead": {
-      "en": "Restaurants, pizzerias, caterers and retailers order from our full catalogue at wholesale prices, delivered across Quebec.",
-      "fr": "Restaurants, pizzerias, traiteurs et détaillants commandent dans tout notre catalogue aux prix de gros, livré partout au Québec."
-    },
-    "who": { "en": "Restaurants|Pizzerias|Caterers|Retailers", "fr": "Restaurants|Pizzerias|Traiteurs|Détaillants" },
-    "steps": [
-      { "title": { "en": "Open an account", "fr": "Ouvrez un compte" },
-        "body": { "en": "Fill out the form below or call us at 514.729.6470.", "fr": "Remplissez le formulaire ci-dessous ou appelez-nous au 514.729.6470." } },
-      { "title": { "en": "Place your order", "fr": "Passez votre commande" },
-        "body": { "en": "$500 minimum for local deliveries. Recurring orders available.", "fr": "Minimum de 500 $ pour les livraisons locales. Commandes récurrentes offertes." } },
-      { "title": { "en": "Get it in 1–2 days", "fr": "Recevez-la en 1 à 2 jours" },
-        "body": { "en": "Delivery within 1–2 business days, depending on your location.", "fr": "Livraison sous 1 à 2 jours ouvrables, selon l’emplacement." } }
-    ],
-    "image_alt": { "en": "Tall warehouse racking stocked with cases of product", "fr": "Hauts rayonnages d’entrepôt remplis de caisses de produits" }
-  },
-
-  "soon": {
-    "eyebrow": { "en": "Coming soon", "fr": "Bientôt" },
-    "title": { "en": "New on the way.", "fr": "Bientôt chez nous." },
-    "lead": { "en": "Products arriving at our warehouse soon. Ask us to reserve yours.", "fr": "Des produits bientôt dans notre entrepôt. Demandez-nous de réserver les vôtres." }
   },
 
   "faq": {

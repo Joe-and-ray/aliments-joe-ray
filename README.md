@@ -41,7 +41,6 @@ Every interactive piece keeps its state in a DOM attribute, so CSS styles it, an
 
 | Element               | Attribute          | States                                    |
 |-----------------------|--------------------|-------------------------------------------|
-| `<html>`              | `data-hero`        | `full \| boxed`: hero layout from `?hero=boxed` (set in `<head>` before paint) |
 | `<html>`              | `data-scrolled`    | present once the page is scrolled         |
 | `#menu` (mobile nav)  | native `popover`   | `:popover-open`                           |
 | `.form` (contact)     | `data-state`       | `idle → sending → sent \| error`          |
@@ -58,15 +57,7 @@ Every push to `main` rebuilds and deploys the preview via `.github/workflows/pag
 Pages serves it under `/<repo-name>/`, so the workflow builds with `SITE_BASE=/<repo-name>` (which also adds `noindex`).
 Locally, `python3 build.py` (no `SITE_BASE`) builds for the domain root as usual.
 
-## Hero layouts
-
-Two hero versions share one markup: full-width photo (default) and boxed (`?hero=boxed`). Preview builds (`SITE_BASE` set) show a small Full-width / Boxed switch, bottom left.
-
-Google reviews in `copy.json` → `testimonials.google_items` are copied verbatim from the Google Maps listing; update by hand.
-
 ## Before launch
-
-- [ ] **Pick a hero layout**, then delete the unused image and its CSS.
 
 - [ ] **Contact form needs a working hook.** `site.form_endpoint` in `copy.json` is a **placeholder** (`https://formspree.io/f/YOUR_FORM_ID`). While it's there the form runs in prototype mode: it shows "Message sent" but **delivers nothing** (a console warning says so). Before launch, create the Formspree form on the client's inbox, paste its ID, rebuild, and send a real test message. Any service that accepts `POST` FormData and returns 2xx works.
 - Deploy the folder root as-is. `/product-catalogue/` keeps the old site's URL.

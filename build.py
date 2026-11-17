@@ -151,18 +151,7 @@ SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M9.9 15.5a2 2 0 0 0-1.4-1.4l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.6a2 2 0 0 0 1.4-1.4l1.6-6.1a.5.5 0 0 1 1 0l1.6 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z"/></symbol>
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
 <symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M22 8.4V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.4a2 2 0 0 1 1.3-1.9l8-3.2a2 2 0 0 1 1.4 0l8 3.2A2 2 0 0 1 22 8.4Z"/><path d="M6 18h12M6 14h12"/><path d="M6 22V10h12v12"/></symbol>
-<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/></symbol>
-<symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.8 14.2a6.6 6.6 0 0 1 0-4.3V7.1H2.1a11 11 0 0 0 0 9.9Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7.1l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4Z"/></symbol>
 </defs></svg>"""
-
-
-def stars(n):
-    return f'<span class="stars" role="img" aria-label="{n}/5">' + "".join(icon("star") for _ in range(int(n))) + "</span>"
-
-
-# Hero layout is a design option the client is choosing: ?hero=boxed shows the boxed version, default is full-width.
-# Set before first paint so there's no flash. Preview builds (SITE_BASE set) also show a small switch to compare.
-HERO_BOOT = "<script>document.documentElement.dataset.hero=new URLSearchParams(location.search).get('hero')==='boxed'?'boxed':'full'</script>"
 
 
 # ---------- shared chrome ----------
@@ -184,14 +173,13 @@ def head(lang, page, title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{alt[lang]}">
-<meta property="og:image" content="{S['url']}/assets/img/hero-wide.jpg">
+<meta property="og:image" content="{S['url']}/assets/img/hero-pizza.jpg">
 <meta property="og:locale" content="{lang}_CA">
 <meta name="theme-color" content="#01563f">
 <link rel="icon" href="/assets/img/favicon.png">
-{HERO_BOOT}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="{v('/assets/css/site.css')}">
 <script src="{v('/assets/js/site.js')}" defer></script>
 {extra}
@@ -201,7 +189,7 @@ def head(lang, page, title, desc, extra=""):
 def header(lang, page):
     home = PATHS["home"][lang]
     other = "fr" if lang == "en" else "en"
-    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("wholesale", "#wholesale"), ("faq", "#faq")]
+    links = [("services", "#services"), ("about", "#about"), ("products", "#products"), ("faq", "#faq")]
     nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
     cat_current = ' aria-current="page"' if page == "catalogue" else ""
     nav += f'<li><a href="{PATHS["catalogue"][lang]}"{cat_current}>{get("nav.catalogue", lang)} <span class="count">{COUNT}</span></a></li>'
@@ -211,11 +199,12 @@ def header(lang, page):
     return f"""<body data-page="{page}">
 {SPRITE}
 <a class="skip" href="#main">{get("nav.skip", lang)}</a>
-<div class="top">
-<p class="announce"><a href="{home}#soon"><span class="long">{get("announce.text", lang)}</span><span class="short">{get("announce.short", lang)}</span> <u>{get("announce.link", lang)}</u>{icon("arrow")}</a></p>
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="{home}"><img src="/assets/img/logo-mark.png" alt="{escape(S['name'])}" width="470" height="456"></a>
+    <a class="brand" href="{home}" aria-label="{escape(S['name'])}">
+      <img src="/assets/img/logo.png" alt="" width="52" height="47">
+      <span class="brand-text"><small>Les Aliments</small>Joe&nbsp;&amp;&nbsp;Ray</span>
+    </a>
     <nav class="nav" id="menu" popover aria-label="Main">
       <button class="icon-btn nav-close" popovertarget="menu" popovertargetaction="hide" aria-label="{get('nav.close', lang)}">{icon("x")}</button>
       <ul>{nav}</ul>
@@ -232,20 +221,16 @@ def header(lang, page):
     </div>
   </div>
 </header>
-</div>
 <main id="main">"""
 
 
 def footer(lang):
     home = PATHS["home"][lang]
-    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("testimonials", "#testimonials"),
-             ("wholesale", "#wholesale"), ("faq", "#faq"), ("soon", "#soon")]
+    links = [("services", "#services"), ("about", "#about"), ("products", "#products"),
+             ("testimonials", "#testimonials"), ("faq", "#faq")]
     nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
     nav += f'<li><a href="{PATHS["catalogue"][lang]}">{get("nav.catalogue", lang)}</a></li>'
     other = "fr" if lang == "en" else "en"
-    switch = ""
-    if BASE:  # preview builds only: let the client flip between the two hero designs
-        switch = """<nav class="hero-switch" aria-label="Hero layout (preview only)"><span>Hero</span><a href="?hero=full#main" data-v="full">Full-width</a><a href="?hero=boxed#main" data-v="boxed">Boxed</a></nav>"""
     return f"""</main>
 <footer class="site-footer">
   <div class="wrap foot-grid">
@@ -267,7 +252,6 @@ def footer(lang):
     <a href="{PATHS['home'][other]}" hreflang="{other}" lang="{other}">{get("nav.switch_lang", lang)}</a>
   </div>
 </footer>
-{switch}
 </body>
 </html>
 """
@@ -285,7 +269,7 @@ def json_ld(lang):
     org = {
         "@context": "https://schema.org", "@type": "WholesaleStore", "name": S["name"], "legalName": S["legal"],
         "url": S["url"] + PATHS["home"][lang], "logo": S["url"] + "/assets/img/logo.png",
-        "image": S["url"] + "/assets/img/hero-wide.jpg", "foundingDate": S["founded"],
+        "image": S["url"] + "/assets/img/hero-pizza.jpg", "foundingDate": S["founded"],
         "telephone": "+1-" + S["phone_main"].replace(".", "-"), "faxNumber": "+1-" + S["fax"].replace(".", "-"),
         "description": C["meta"]["description"][lang], "areaServed": "Quebec",
         "address": {"@type": "PostalAddress", "streetAddress": S["street"], "addressLocality": "Saint-Léonard",
@@ -300,6 +284,8 @@ def json_ld(lang):
 # ---------- home ----------
 def home(lang):
     cat = PATHS["catalogue"][lang]
+    hints = "".join(f'<a class="chip" href="{cat}?q={quote(h)}">{escape(h)}</a>'
+                    for h in C["hero"]["search_hints"][lang].split("|"))
     words = C["marquee"][lang].split("|")
     marquee = "".join(f"<span>{escape(w)}</span>" for w in words)
 
@@ -333,18 +319,7 @@ def home(lang):
         txt = (("Since " if lang == "en" else "Depuis ") + s) if len(s) == 4 else (s + (" years" if lang == "en" else " ans"))
         return f'<span class="since">{escape(txt)}</span>'
 
-    T = C["testimonials"]
-    g_lbl = get("testimonials.google", lang)
     quotes = "".join(f"""
-      <li class="quote" data-source="google">
-        {stars(r["stars"])}
-        <blockquote lang="en"><p>{escape(r["text"])}</p></blockquote>
-        <div class="who">
-          <span class="avatar" aria-hidden="true">{escape("".join(w[0] for w in r["who"].split()[:2]))}</span>
-          <span><strong>{escape(r["who"])}</strong><small class="g-src">{icon("google", "i g")}{g_lbl}</small></span>
-        </div>
-      </li>""" for r in T["google_items"])
-    quotes += "".join(f"""
       <li class="quote">
         <blockquote><p>{tr(t["quote"], lang)}</p></blockquote>
         <div class="who">
@@ -360,33 +335,89 @@ def home(lang):
         <p>{tr(f["a"], lang)}</p>
       </details>""" for i, f in enumerate(C["faq"]["items"]))
 
-    who = " · ".join(escape(w) for w in C["wholesale"]["who"][lang].split("|"))
-    wsteps = "".join(f'<li><h3>{tr(s["title"], lang)}</h3><p>{tr(s["body"], lang)}</p></li>' for s in C["wholesale"]["steps"])
     endpoint = escape(S["form_endpoint"])
     eva_prefill = quote(C["eva"]["prefill"][lang])
     home_path = PATHS["home"][lang]
 
     body = f"""
 <section class="hero">
-  <!-- ponytail: both hero images load while the client compares layouts; delete the unused one once they pick -->
-  <img class="hero-bg v-full" src="/assets/img/hero-wide.jpg" alt="" width="2000" height="1166" fetchpriority="high">
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">{get("hero.eyebrow", lang)}</p>
       <h1>{get("hero.title", lang)}</h1>
       <p class="lead">{get("hero.lead", lang)}</p>
-      <div class="row">
-        <a class="btn btn-primary" href="{cat}">{get("hero.cta", lang)} <span class="count">{COUNT}</span> {icon("arrow")}</a>
-        <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
-      </div>
+      <form class="search search-hero" action="{cat}" method="get" role="search">
+        {icon("search")}
+        <input type="search" name="q" placeholder="{get('hero.search_placeholder', lang, count=COUNT)}" aria-label="{get('catalogue.search', lang)}" autocomplete="off">
+        <button class="btn btn-dark" type="submit">{get("hero.search_button", lang)}</button>
+      </form>
+      <div class="chips">{hints}</div>
     </div>
-    <div class="hero-media v-boxed">
-      <img class="hero-img" src="/assets/img/hero-boxed.jpg" alt="{get('hero.image_alt', lang)}" width="1120" height="1400">
+    <div class="hero-media">
+      <img class="hero-img" src="/assets/img/hero-pizza.jpg" alt="{get('hero.image_alt', lang)}" width="1400" height="1381" fetchpriority="high">
+      <img class="seal" src="/assets/img/logo.png" alt="{get('hero.seal_alt', lang)}" width="140" height="127">
+      <a class="hero-card" href="#acqua-eva">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span><small>{get("eva.status", lang)}</small><strong>Acqua eVa Premium</strong></span>
+        {icon("arrow")}
+      </a>
     </div>
   </div>
 </section>
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track">{marquee}{marquee}</div></div>
+
+<section class="section intro" id="intro">
+  <div class="wrap intro-grid">
+    <div>
+      <p class="eyebrow">{get("intro.eyebrow", lang)}</p>
+      <h2>{get("intro.title", lang)}</h2>
+      <p class="lead">{get("intro.body", lang)}</p>
+      <div class="row">
+        <a class="btn btn-primary" href="#contact">{get("hero.cta_pricing", lang)} {icon("arrow")}</a>
+        <a class="btn btn-ghost" href="{cat}">{get("nav.catalogue", lang)} <span class="count">{COUNT}</span></a>
+      </div>
+    </div>
+    <figure class="intro-media"><img src="/assets/img/kitchen.jpg" alt="{get('intro.image_alt', lang)}" loading="lazy" width="1600" height="890"></figure>
+  </div>
+  <dl class="wrap stats">
+    <div><dt>{get("stats.founded", lang)}</dt><dd>{S['founded']}</dd></div>
+    <div><dt>{get("stats.generations", lang)}</dt><dd>{get("stats.generations_value", lang)}</dd></div>
+    <div><dt>{get("stats.products", lang)}</dt><dd>{get("stats.products_value", lang)}</dd></div>
+    <div><dt>{get("stats.delivery", lang)}</dt><dd>{get("stats.delivery_value", lang)}</dd></div>
+  </dl>
+</section>
+
+<section class="section" id="acqua-eva">
+  <div class="wrap">
+    <div class="eva panel-dark">
+      <figure class="eva-media"><img src="/assets/img/acqua-eva.jpg" alt="{get('eva.image_alt', lang)}" loading="lazy" width="733" height="1100"></figure>
+      <div class="eva-copy">
+        <p class="status" data-status="coming-soon"><span class="status-dot" aria-hidden="true"></span>{get("eva.status", lang)}</p>
+        <h2>{get("eva.title", lang)}</h2>
+        <p class="tagline">{get("eva.tagline", lang)}</p>
+        <p>{get("eva.body", lang)}</p>
+        <ul class="specs"><li>{get("eva.format", lang)}</li><li>{get("eva.case", lang)}</li></ul>
+        <ol class="release">
+          <li data-state="scheduled"><span class="cap cap-white" aria-hidden="true"></span><strong>{get("eva.still", lang)}</strong><span>{get("eva.still_when", lang)}</span></li>
+          <li data-state="later"><span class="cap cap-black" aria-hidden="true"></span><strong>{get("eva.sparkling", lang)}</strong><span>{get("eva.sparkling_when", lang)}</span></li>
+        </ol>
+        <a class="btn btn-gold" href="{home_path}?message={eva_prefill}#contact">{get("eva.cta", lang)} {icon("arrow")}</a>
+        <p class="fine">{get("eva.note", lang)}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">{get("services.eyebrow", lang)}</p>
+      <h2>{get("services.title", lang)}</h2>
+    </header>
+    <ul class="services">{services}</ul>
+  </div>
+</section>
 
 <section class="section about" id="about">
   <div class="wrap about-grid">
@@ -399,15 +430,19 @@ def home(lang):
   </div>
 </section>
 
-<section class="trust" aria-label="{get('intro.eyebrow', lang)}">
-  <dl class="wrap stats">
-    <div><dt>{get("stats.founded", lang)}</dt><dd>{S['founded']}</dd></div>
-    <div><dt>{get("stats.generations", lang)}</dt><dd>{get("stats.generations_value", lang)}</dd></div>
-    <div><dt>{get("stats.products", lang)}</dt><dd>{get("stats.products_value", lang)}</dd></div>
-    <div><dt>{get("stats.cfia", lang)}</dt><dd>{get("stats.cfia_value", lang)}</dd></div>
-    <div><dt>{get("stats.delivery", lang)}</dt><dd>{get("stats.delivery_value", lang)}</dd></div>
-    <div><dt><a href="{S['google_reviews_url']}" target="_blank" rel="noopener">{get("stats.google", lang, n=T["google_count"])}</a></dt><dd>{T["google_score"]}{icon("star", "i star-solo")}</dd></div>
-  </dl>
+<section class="brands" aria-labelledby="brands-h">
+  <div class="wrap"><h2 id="brands-h" class="brands-h">{get("brands.title", lang)}</h2></div>
+  <div class="logo-rail"><ul class="logo-track">{logos}</ul></div>
+</section>
+
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">{get("testimonials.eyebrow", lang)}</p>
+      <h2>{get("testimonials.title", lang)}</h2>
+    </header>
+    <ul class="quotes">{quotes}</ul>
+  </div>
 </section>
 
 <section class="section" id="products">
@@ -417,61 +452,14 @@ def home(lang):
         <p class="eyebrow">{get("products.eyebrow", lang)}</p>
         <h2>{get("products.title", lang)}</h2>
       </div>
-      <a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} <span class="count">{COUNT}</span> {icon("arrow")}</a>
-    </header>
-    <ul class="posters">{prods}</ul>
-  </div>
-</section>
-
-<section class="section services-sec" id="services">
-  <div class="wrap">
-    <header class="section-head">
-      <p class="eyebrow">{get("services.eyebrow", lang)}</p>
-      <h2>{get("services.title", lang)}</h2>
-    </header>
-    <ul class="services">{services}</ul>
-  </div>
-</section>
-
-<section class="brands" aria-labelledby="brands-h">
-  <div class="wrap"><h2 id="brands-h" class="brands-h">{get("brands.title", lang)}</h2></div>
-  <div class="logo-rail"><ul class="logo-track">{logos}</ul></div>
-</section>
-
-<section class="section" id="testimonials">
-  <div class="wrap">
-    <header class="section-head split">
-      <div>
-        <p class="eyebrow">{get("testimonials.eyebrow", lang)}</p>
-        <h2>{get("testimonials.title", lang)}</h2>
-        <a class="g-rating" href="{S['google_reviews_url']}" target="_blank" rel="noopener">{icon("google", "i g")}<strong>{T['google_score']}</strong>{stars(5)}<span>{get("testimonials.rating", lang, n=T["google_count"])}</span>{icon("arrow-ur")}</a>
-      </div>
-      <div class="rail-ctrl" data-rail-ctrl="quotes">
-        <button class="icon-btn" data-dir="-1" aria-label="{get('testimonials.prev', lang)}">{icon("left")}</button>
-        <button class="icon-btn" data-dir="1" aria-label="{get('testimonials.next', lang)}">{icon("right")}</button>
+      <div class="rail-ctrl" data-rail-ctrl="posters">
+        <button class="icon-btn" data-dir="-1" aria-label="{get('products.prev', lang)}">{icon("left")}</button>
+        <button class="icon-btn" data-dir="1" aria-label="{get('products.next', lang)}">{icon("right")}</button>
       </div>
     </header>
   </div>
-  <ul class="quotes" id="quotes" tabindex="0" aria-label="{get('testimonials.title', lang)}">{quotes}</ul>
-</section>
-
-<section class="section" id="wholesale">
-  <div class="wrap">
-    <div class="wholesale panel-dark">
-      <div class="wholesale-copy">
-        <p class="eyebrow">{get("wholesale.eyebrow", lang)}</p>
-        <h2>{get("wholesale.title", lang)}</h2>
-        <p class="lead">{get("wholesale.lead", lang)}</p>
-        <p class="who">{who}</p>
-        <ol class="steps">{wsteps}</ol>
-        <div class="row">
-          <a class="btn btn-gold" href="#contact">{get("hero.cta_pricing", lang)} {icon("arrow")}</a>
-          <a class="btn btn-ghost-light" href="{cat}">{get("nav.catalogue", lang)} <span class="count">{COUNT}</span></a>
-        </div>
-      </div>
-      <figure class="wholesale-media"><img src="/assets/img/wholesale.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="1200" height="1500"></figure>
-    </div>
-  </div>
+  <ul class="posters" id="posters">{prods}</ul>
+  <div class="wrap center"><a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} <span class="count">{COUNT}</span> {icon("arrow")}</a></div>
 </section>
 
 <section class="section" id="faq">
@@ -483,34 +471,6 @@ def home(lang):
       <a class="btn btn-ghost" href="{tel(S['phone_main'])}">{icon("phone")} {S['phone_main']}</a>
     </div>
     <div class="faq-list">{faqs}</div>
-  </div>
-</section>
-
-<section class="section" id="soon">
-  <div class="wrap">
-    <header class="section-head">
-      <p class="eyebrow">{get("soon.eyebrow", lang)}</p>
-      <h2>{get("soon.title", lang)}</h2>
-      <p class="lead">{get("soon.lead", lang)}</p>
-    </header>
-    <ul class="soon-list">
-      <li class="eva panel-dark" id="acqua-eva">
-        <figure class="eva-media"><img src="/assets/img/acqua-eva.jpg" alt="{get('eva.image_alt', lang)}" loading="lazy" width="733" height="1100"></figure>
-        <div class="eva-copy">
-          <p class="status" data-status="coming-soon"><span class="status-dot" aria-hidden="true"></span>{get("eva.status", lang)}</p>
-          <h3>{get("eva.title", lang)}</h3>
-          <p class="tagline">{get("eva.tagline", lang)}</p>
-          <p>{get("eva.body", lang)}</p>
-          <ul class="specs"><li>{get("eva.format", lang)}</li><li>{get("eva.case", lang)}</li></ul>
-          <ol class="release">
-            <li data-state="scheduled"><span class="cap cap-white" aria-hidden="true"></span><strong>{get("eva.still", lang)}</strong><span>{get("eva.still_when", lang)}</span></li>
-            <li data-state="later"><span class="cap cap-black" aria-hidden="true"></span><strong>{get("eva.sparkling", lang)}</strong><span>{get("eva.sparkling_when", lang)}</span></li>
-          </ol>
-          <a class="btn btn-gold" href="{home_path}?message={eva_prefill}#contact">{get("eva.cta", lang)} {icon("arrow")}</a>
-          <p class="fine">{get("eva.note", lang)}</p>
-        </div>
-      </li>
-    </ul>
   </div>
 </section>
 
