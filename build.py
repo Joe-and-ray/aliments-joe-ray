@@ -156,12 +156,16 @@ SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 </defs></svg>"""
 
 
-# ---------- shared chrome ----------
-# Hero layout is a design option the client is choosing between: ?hero=boxed shows the boxed version, default is full-width.
-# Set before first paint so there's no flash. Preview builds (SITE_BASE set) also show a small switch to compare them.
+def stars(n):
+    return f'<span class="stars" role="img" aria-label="{n}/5">' + "".join(icon("star") for _ in range(int(n))) + "</span>"
+
+
+# Hero layout is a design option the client is choosing: ?hero=boxed shows the boxed version, default is full-width.
+# Set before first paint so there's no flash. Preview builds (SITE_BASE set) also show a small switch to compare.
 HERO_BOOT = "<script>document.documentElement.dataset.hero=new URLSearchParams(location.search).get('hero')==='boxed'?'boxed':'full'</script>"
 
 
+# ---------- shared chrome ----------
 def head(lang, page, title, desc, extra=""):
     alt = {l: S["url"] + PATHS[page][l] for l in LANGS}
     return f"""<!doctype html>
@@ -182,27 +186,25 @@ def head(lang, page, title, desc, extra=""):
 <meta property="og:url" content="{alt[lang]}">
 <meta property="og:image" content="{S['url']}/assets/img/hero-wide.jpg">
 <meta property="og:locale" content="{lang}_CA">
-<meta name="theme-color" content="#0b3327">
+<meta name="theme-color" content="#01563f">
 <link rel="icon" href="/assets/img/favicon.png">
 {HERO_BOOT}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="{v('/assets/css/site.css')}">
 <script src="{v('/assets/js/site.js')}" defer></script>
 {extra}
 </head>"""
 
 
-NAV = [("about", "#about"), ("products", "#products"), ("wholesale", "#wholesale"),
-       ("testimonials", "#testimonials"), ("faq", "#faq")]
-
-
 def header(lang, page):
     home = PATHS["home"][lang]
-    nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in NAV)
+    other = "fr" if lang == "en" else "en"
+    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("wholesale", "#wholesale"), ("faq", "#faq")]
+    nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
     cat_current = ' aria-current="page"' if page == "catalogue" else ""
-    nav += f'<li><a href="{PATHS["catalogue"][lang]}"{cat_current}>{get("nav.catalogue", lang)}</a></li>'
+    nav += f'<li><a href="{PATHS["catalogue"][lang]}"{cat_current}>{get("nav.catalogue", lang)} <span class="count">{COUNT}</span></a></li>'
     langs = "".join(
         f'<a href="{PATHS[page][l]}" hreflang="{l}" lang="{l}"' + (' aria-current="true"' if l == lang else "") + f'>{l.upper()}</a>'
         for l in LANGS)
@@ -210,34 +212,35 @@ def header(lang, page):
 {SPRITE}
 <a class="skip" href="#main">{get("nav.skip", lang)}</a>
 <div class="top">
-  <p class="announce"><a href="{home}#soon"><span class="long">{get("announce.text", lang)}</span><span class="short">{get("announce.short", lang)}</span> <u>{get("announce.link", lang)}</u>{icon("arrow")}</a></p>
-  <header class="site-header">
-    <div class="wrap bar">
-      <a class="brand" href="{home}"><img src="/assets/img/logo-mark.png" alt="{escape(S['name'])}" width="470" height="456"></a>
-      <nav class="nav" id="menu" popover aria-label="Main">
-        <button class="icon-btn nav-close" popovertarget="menu" popovertargetaction="hide" aria-label="{get('nav.close', lang)}">{icon("x")}</button>
-        <ul>{nav}</ul>
-        <div class="nav-foot">
-          <div class="lang" role="group" aria-label="Language / Langue">{langs}</div>
-          <a class="btn btn-primary" href="{home}#contact">{get("nav.contact", lang)}</a>
-        </div>
-      </nav>
-      <div class="bar-actions">
-        <div class="lang hide-sm" role="group" aria-label="Language / Langue">{langs}</div>
-        <a class="phone hide-sm" href="{tel(S['phone_main'])}">{icon("phone")}{S['phone_main']}</a>
-        <a class="btn btn-primary hide-sm" href="{home}#contact">{get("nav.contact", lang)}</a>
-        <a class="icon-btn show-sm" href="{tel(S['phone_main'])}" aria-label="{S['phone_main']}">{icon("phone")}</a>
-        <button class="icon-btn menu-btn" popovertarget="menu" aria-label="{get('nav.menu', lang)}">{icon("menu")}</button>
+<p class="announce"><a href="{home}#soon"><span class="long">{get("announce.text", lang)}</span><span class="short">{get("announce.short", lang)}</span> <u>{get("announce.link", lang)}</u>{icon("arrow")}</a></p>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{home}"><img src="/assets/img/logo-mark.png" alt="{escape(S['name'])}" width="470" height="456"></a>
+    <nav class="nav" id="menu" popover aria-label="Main">
+      <button class="icon-btn nav-close" popovertarget="menu" popovertargetaction="hide" aria-label="{get('nav.close', lang)}">{icon("x")}</button>
+      <ul>{nav}</ul>
+      <div class="nav-foot">
+        <div class="lang" role="group" aria-label="Language / Langue">{langs}</div>
+        <a class="btn btn-primary" href="{home}#contact">{get("nav.contact", lang)}</a>
       </div>
+    </nav>
+    <div class="bar-actions">
+      <div class="lang" role="group" aria-label="Language / Langue">{langs}</div>
+      <a class="icon-btn" href="{tel(S['phone_main'])}" aria-label="{S['phone_main']}">{icon("phone")}</a>
+      <a class="btn btn-primary hide-sm" href="{home}#contact">{get("nav.contact", lang)}</a>
+      <button class="icon-btn menu-btn" popovertarget="menu" aria-label="{get('nav.menu', lang)}">{icon("menu")}</button>
     </div>
-  </header>
+  </div>
+</header>
 </div>
 <main id="main">"""
 
 
 def footer(lang):
     home = PATHS["home"][lang]
-    nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in NAV + [("soon", "#soon")])
+    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("testimonials", "#testimonials"),
+             ("wholesale", "#wholesale"), ("faq", "#faq"), ("soon", "#soon")]
+    nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
     nav += f'<li><a href="{PATHS["catalogue"][lang]}">{get("nav.catalogue", lang)}</a></li>'
     other = "fr" if lang == "en" else "en"
     switch = ""
@@ -247,7 +250,7 @@ def footer(lang):
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div>
-      <p class="wordmark">Les Aliments<br>Joe &amp; Ray</p>
+      <img class="foot-logo" src="/assets/img/logo.png" alt="{escape(S['name'])}" width="120" height="109" loading="lazy">
       <p class="muted">{get("footer.tagline", lang)}</p>
     </div>
     <div>
@@ -279,10 +282,9 @@ def contact_lines(lang):
 
 
 def json_ld(lang):
-    T = C["testimonials"]
     org = {
         "@context": "https://schema.org", "@type": "WholesaleStore", "name": S["name"], "legalName": S["legal"],
-        "url": S["url"] + PATHS["home"][lang], "logo": S["url"] + "/assets/img/logo-mark.png",
+        "url": S["url"] + PATHS["home"][lang], "logo": S["url"] + "/assets/img/logo.png",
         "image": S["url"] + "/assets/img/hero-wide.jpg", "foundingDate": S["founded"],
         "telephone": "+1-" + S["phone_main"].replace(".", "-"), "faxNumber": "+1-" + S["fax"].replace(".", "-"),
         "description": C["meta"]["description"][lang], "areaServed": "Quebec",
@@ -295,57 +297,62 @@ def json_ld(lang):
     return "".join(f'<script type="application/ld+json">{json.dumps(d, ensure_ascii=False)}</script>' for d in (org, faq))
 
 
-def stars(n):
-    return f'<span class="stars" role="img" aria-label="{n}/5">' + "".join(icon("star") for _ in range(int(n))) + "</span>"
-
-
 # ---------- home ----------
 def home(lang):
     cat = PATHS["catalogue"][lang]
-    home_path = PATHS["home"][lang]
-    T = C["testimonials"]
-
-    about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["body"])
-
-    trust = "".join(f'<li><strong>{tr(t["value"], lang)}</strong><span>{tr(t["label"], lang)}</span></li>'
-                    for t in C["trust"]["items"])
-    trust += (f'<li><a href="{S["google_reviews_url"]}" target="_blank" rel="noopener"><strong>{T["google_score"]}'
-              f'{icon("star", "i star-solo")}</strong><span>{get("testimonials.rating", lang, n=T["google_count"])}</span></a></li>')
-
-    prods = "".join(f"""
-      <li class="product">
-        <a href="{cat}?q={quote(p['q'])}">
-          <img src="/assets/img/products/{p['img']}" alt="" loading="lazy" width="600" height="750">
-          <span class="product-kind">{tr(p['kind'], lang)}</span>
-          <span class="product-name">{tr(p['name'], lang)}</span>
-        </a>
-      </li>""" for p in C["products"]["items"])
+    words = C["marquee"][lang].split("|")
+    marquee = "".join(f"<span>{escape(w)}</span>" for w in words)
 
     services = "".join(f"""
-      <li><h3>{tr(s["title"], lang)}</h3><p>{tr(s["body"], lang)}</p></li>"""
-                       for s in C["services"]["items"])
+      <li class="service">
+        <span class="service-icon">{icon(s["icon"])}</span>
+        <h3>{tr(s["title"], lang)}</h3>
+        <p>{tr(s["body"], lang)}</p>
+      </li>""" for s in C["services"]["items"])
+
+    steps = "".join(f"""
+        <li><span class="when">{tr(s["when"], lang)}</span><p>{tr(s["body"], lang)}</p></li>"""
+                    for s in C["about"]["steps"])
 
     logo = lambda b, dup: (f"""<li{' aria-hidden="true"' if dup else ''}><a href="{b['url']}" target="_blank" rel="noopener" title="{escape(b['name'])}"{' tabindex="-1"' if dup else ''}>"""
                            f"""<img src="/assets/img/brands/{b['logo']}" alt="{'' if dup else escape(b['name'])}" loading="lazy"></a></li>""")
     # second copy makes the marquee loop seamlessly; hidden from AT and tab order
     logos = "".join(logo(b, False) for b in C["brands"]["items"]) + "".join(logo(b, True) for b in C["brands"]["items"])
 
-    g_src = get("testimonials.google", lang)
-    orig = get("testimonials.original", lang)
-    reviews = "".join(f"""
-      <li class="review" data-source="google">
+    prods = "".join(f"""
+      <li class="poster">
+        <a href="{cat}?q={quote(p['q'])}">
+          <span class="poster-frame"><img src="/assets/img/products/{p['img']}" alt="" loading="lazy"></span>
+          <span class="poster-meta"><span><span class="poster-kicker">{tr(p['origin'], lang)}</span><span class="poster-name">{tr(p['name'], lang)}</span></span><span class="poster-go">{icon("arrow-ur")}</span></span>
+        </a>
+      </li>""" for p in C["products"]["items"])
+
+    def since(s):
+        if not s:
+            return ""
+        txt = (("Since " if lang == "en" else "Depuis ") + s) if len(s) == 4 else (s + (" years" if lang == "en" else " ans"))
+        return f'<span class="since">{escape(txt)}</span>'
+
+    T = C["testimonials"]
+    g_lbl = get("testimonials.google", lang)
+    quotes = "".join(f"""
+      <li class="quote" data-source="google">
         {stars(r["stars"])}
         <blockquote lang="en"><p>{escape(r["text"])}</p></blockquote>
-        <p class="review-by"><strong>{escape(r["who"])}</strong><span>{icon("google", "i g")}{g_src}{(" · " + orig) if orig else ""}</span></p>
+        <div class="who">
+          <span class="avatar" aria-hidden="true">{escape("".join(w[0] for w in r["who"].split()[:2]))}</span>
+          <span><strong>{escape(r["who"])}</strong><small class="g-src">{icon("google", "i g")}{g_lbl}</small></span>
+        </div>
       </li>""" for r in T["google_items"])
-    reviews += "".join(f"""
-      <li class="review" data-source="client">
+    quotes += "".join(f"""
+      <li class="quote">
         <blockquote><p>{tr(t["quote"], lang)}</p></blockquote>
-        <p class="review-by"><strong>{escape(t["who"])}</strong><span>{escape(t["where"]) or get("testimonials.client", lang)}</span></p>
-      </li>""" for t in T["items"])
-
-    who = " · ".join(escape(w) for w in C["wholesale"]["who"][lang].split("|"))
-    steps = "".join(f'<li><h3>{tr(s["title"], lang)}</h3><p>{tr(s["body"], lang)}</p></li>' for s in C["wholesale"]["steps"])
+        <div class="who">
+          <span class="avatar" aria-hidden="true">{escape("".join(w[0] for w in t["who"].replace("&", "").split()[:2]))}</span>
+          <span><strong>{escape(t["who"])}</strong>{('<small>' + escape(t["where"]) + '</small>') if t["where"] else ""}</span>
+          {since(t["since"])}
+        </div>
+      </li>""" for t in C["testimonials"]["items"])
 
     faqs = "".join(f"""
       <details name="faq"{' open' if i == 0 else ''}>
@@ -353,159 +360,192 @@ def home(lang):
         <p>{tr(f["a"], lang)}</p>
       </details>""" for i, f in enumerate(C["faq"]["items"]))
 
+    who = " · ".join(escape(w) for w in C["wholesale"]["who"][lang].split("|"))
+    wsteps = "".join(f'<li><h3>{tr(s["title"], lang)}</h3><p>{tr(s["body"], lang)}</p></li>' for s in C["wholesale"]["steps"])
     endpoint = escape(S["form_endpoint"])
     eva_prefill = quote(C["eva"]["prefill"][lang])
-    pricing = f'{home_path}#contact'
+    home_path = PATHS["home"][lang]
 
     body = f"""
 <section class="hero">
-  <div class="hero-media">
-    <!-- ponytail: both hero images load while the client compares layouts; delete the unused <img> once they pick -->
-    <img class="v-full" src="/assets/img/hero-wide.jpg" alt="{get('hero.image_alt', lang)}" width="2000" height="1166" fetchpriority="high">
-    <img class="v-boxed" src="/assets/img/hero-boxed.jpg" alt="{get('hero.image_alt', lang)}" width="1120" height="1400">
-  </div>
-  <div class="wrap hero-copy">
-    <h1>{get("hero.title", lang)}</h1>
-    <p class="lead">{get("hero.lead", lang)}</p>
-    <div class="row">
-      <a class="btn btn-primary" href="{cat}">{get("hero.cta", lang)} {icon("arrow")}</a>
-      <a class="btn btn-line" href="{pricing}">{get("hero.cta_pricing", lang)}</a>
+  <!-- ponytail: both hero images load while the client compares layouts; delete the unused one once they pick -->
+  <img class="hero-bg v-full" src="/assets/img/hero-wide.jpg" alt="" width="2000" height="1166" fetchpriority="high">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{get("hero.eyebrow", lang)}</p>
+      <h1>{get("hero.title", lang)}</h1>
+      <p class="lead">{get("hero.lead", lang)}</p>
+      <div class="row">
+        <a class="btn btn-primary" href="{cat}">{get("hero.cta", lang)} <span class="count">{COUNT}</span> {icon("arrow")}</a>
+        <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
+      </div>
+    </div>
+    <div class="hero-media v-boxed">
+      <img class="hero-img" src="/assets/img/hero-boxed.jpg" alt="{get('hero.image_alt', lang)}" width="1120" height="1400">
     </div>
   </div>
 </section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track">{marquee}{marquee}</div></div>
 
 <section class="section about" id="about">
   <div class="wrap about-grid">
     <figure class="about-media"><img src="/assets/img/history.jpg" alt="{get('about.image_alt', lang)}" loading="lazy" width="1019" height="1100"></figure>
-    <div class="about-copy">
-      <p class="kicker">{get("about.eyebrow", lang)}</p>
+    <div>
+      <p class="eyebrow">{get("about.eyebrow", lang)}</p>
       <h2>{get("about.title", lang)}</h2>
-      {about}
+      <ol class="timeline">{steps}</ol>
     </div>
   </div>
 </section>
 
-<section class="trust" aria-label="{get('about.eyebrow', lang)}">
-  <ul class="wrap">{trust}</ul>
+<section class="trust" aria-label="{get('intro.eyebrow', lang)}">
+  <dl class="wrap stats">
+    <div><dt>{get("stats.founded", lang)}</dt><dd>{S['founded']}</dd></div>
+    <div><dt>{get("stats.generations", lang)}</dt><dd>{get("stats.generations_value", lang)}</dd></div>
+    <div><dt>{get("stats.products", lang)}</dt><dd>{get("stats.products_value", lang)}</dd></div>
+    <div><dt>{get("stats.cfia", lang)}</dt><dd>{get("stats.cfia_value", lang)}</dd></div>
+    <div><dt>{get("stats.delivery", lang)}</dt><dd>{get("stats.delivery_value", lang)}</dd></div>
+    <div><dt><a href="{S['google_reviews_url']}" target="_blank" rel="noopener">{get("stats.google", lang, n=T["google_count"])}</a></dt><dd>{T["google_score"]}{icon("star", "i star-solo")}</dd></div>
+  </dl>
 </section>
 
 <section class="section" id="products">
   <div class="wrap">
-    <header class="section-head">
-      <div><h2>{get("products.title", lang)}</h2><p class="lead">{get("products.lead", lang)}</p></div>
-      <a class="link-arrow" href="{cat}">{get("products.all", lang, count=f"{COUNT:,}".replace(",", " " if lang == "fr" else ","))} {icon("arrow")}</a>
+    <header class="section-head split">
+      <div>
+        <p class="eyebrow">{get("products.eyebrow", lang)}</p>
+        <h2>{get("products.title", lang)}</h2>
+      </div>
+      <a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} <span class="count">{COUNT}</span> {icon("arrow")}</a>
     </header>
-    <ul class="products">{prods}</ul>
+    <ul class="posters">{prods}</ul>
   </div>
 </section>
 
-<section class="section services" id="services">
+<section class="section services-sec" id="services">
   <div class="wrap">
-    <header class="section-head"><h2>{get("services.title", lang)}</h2></header>
-    <ol class="service-list">{services}</ol>
+    <header class="section-head">
+      <p class="eyebrow">{get("services.eyebrow", lang)}</p>
+      <h2>{get("services.title", lang)}</h2>
+    </header>
+    <ul class="services">{services}</ul>
   </div>
 </section>
 
 <section class="brands" aria-labelledby="brands-h">
-  <div class="wrap brands-head"><h2 id="brands-h">{get("brands.title", lang)}</h2><p>{get("brands.lead", lang)}</p></div>
+  <div class="wrap"><h2 id="brands-h" class="brands-h">{get("brands.title", lang)}</h2></div>
   <div class="logo-rail"><ul class="logo-track">{logos}</ul></div>
 </section>
 
 <section class="section" id="testimonials">
   <div class="wrap">
-    <header class="section-head">
+    <header class="section-head split">
       <div>
+        <p class="eyebrow">{get("testimonials.eyebrow", lang)}</p>
         <h2>{get("testimonials.title", lang)}</h2>
         <a class="g-rating" href="{S['google_reviews_url']}" target="_blank" rel="noopener">{icon("google", "i g")}<strong>{T['google_score']}</strong>{stars(5)}<span>{get("testimonials.rating", lang, n=T["google_count"])}</span>{icon("arrow-ur")}</a>
       </div>
-      <div class="rail-ctrl" data-rail-ctrl="reviews">
+      <div class="rail-ctrl" data-rail-ctrl="quotes">
         <button class="icon-btn" data-dir="-1" aria-label="{get('testimonials.prev', lang)}">{icon("left")}</button>
         <button class="icon-btn" data-dir="1" aria-label="{get('testimonials.next', lang)}">{icon("right")}</button>
       </div>
     </header>
   </div>
-  <ul class="reviews" id="reviews" data-rail tabindex="0" aria-label="{get('testimonials.title', lang)}">{reviews}</ul>
+  <ul class="quotes" id="quotes" tabindex="0" aria-label="{get('testimonials.title', lang)}">{quotes}</ul>
 </section>
 
-<section class="section wholesale" id="wholesale">
-  <div class="wrap wholesale-grid">
-    <div>
-      <p class="kicker">{get("wholesale.eyebrow", lang)}</p>
-      <h2>{get("wholesale.title", lang)}</h2>
-      <p class="lead">{get("wholesale.lead", lang)}</p>
-      <p class="who">{who}</p>
-      <ol class="steps">{steps}</ol>
-      <div class="row">
-        <a class="btn btn-gold" href="{pricing}">{get("hero.cta_pricing", lang)} {icon("arrow")}</a>
-        <a class="btn btn-line-light" href="{cat}">{get("hero.cta", lang)}</a>
+<section class="section" id="wholesale">
+  <div class="wrap">
+    <div class="wholesale panel-dark">
+      <div class="wholesale-copy">
+        <p class="eyebrow">{get("wholesale.eyebrow", lang)}</p>
+        <h2>{get("wholesale.title", lang)}</h2>
+        <p class="lead">{get("wholesale.lead", lang)}</p>
+        <p class="who">{who}</p>
+        <ol class="steps">{wsteps}</ol>
+        <div class="row">
+          <a class="btn btn-gold" href="#contact">{get("hero.cta_pricing", lang)} {icon("arrow")}</a>
+          <a class="btn btn-ghost-light" href="{cat}">{get("nav.catalogue", lang)} <span class="count">{COUNT}</span></a>
+        </div>
       </div>
+      <figure class="wholesale-media"><img src="/assets/img/wholesale.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="1200" height="1500"></figure>
     </div>
-    <figure class="wholesale-media"><img src="/assets/img/wholesale.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="1200" height="1500"></figure>
   </div>
 </section>
 
 <section class="section" id="faq">
   <div class="wrap faq-grid">
     <div class="faq-aside">
+      <p class="eyebrow">{get("faq.eyebrow", lang)}</p>
       <h2>{get("faq.title", lang)}</h2>
-      <p class="lead">{get("faq.lead", lang)}</p>
-      <a class="phone" href="{tel(S['phone_main'])}">{icon("phone")}{S['phone_main']}</a>
+      <p class="muted">{get("faq.aside", lang)}</p>
+      <a class="btn btn-ghost" href="{tel(S['phone_main'])}">{icon("phone")} {S['phone_main']}</a>
     </div>
     <div class="faq-list">{faqs}</div>
   </div>
 </section>
 
-<section class="section soon" id="soon">
+<section class="section" id="soon">
   <div class="wrap">
-    <header class="section-head"><div><h2>{get("soon.title", lang)}</h2><p class="lead">{get("soon.lead", lang)}</p></div></header>
-    <article class="eva" id="acqua-eva">
-      <figure class="eva-media"><img src="/assets/img/acqua-eva.jpg" alt="{get('eva.image_alt', lang)}" loading="lazy" width="733" height="1100"></figure>
-      <div class="eva-copy">
-        <p class="kicker">{get("eva.status", lang)}</p>
-        <h3>{get("eva.title", lang)}</h3>
-        <p class="tagline">{get("eva.tagline", lang)}</p>
-        <p>{get("eva.body", lang)}</p>
-        <p><strong>{get("eva.exclusive", lang)}</strong></p>
-        <dl class="release">
-          <div data-state="scheduled"><dt><span class="cap cap-white" aria-hidden="true"></span>{get("eva.still", lang)}</dt><dd>{get("eva.still_when", lang)}</dd></div>
-          <div data-state="later"><dt><span class="cap cap-black" aria-hidden="true"></span>{get("eva.sparkling", lang)}</dt><dd>{get("eva.sparkling_when", lang)}</dd></div>
-        </dl>
-        <p class="spec">{get("eva.spec", lang)}</p>
-        <a class="btn btn-primary" href="{home_path}?message={eva_prefill}#contact">{get("eva.cta", lang)} {icon("arrow")}</a>
-        <p class="fine">{get("eva.note", lang)}</p>
-      </div>
-    </article>
+    <header class="section-head">
+      <p class="eyebrow">{get("soon.eyebrow", lang)}</p>
+      <h2>{get("soon.title", lang)}</h2>
+      <p class="lead">{get("soon.lead", lang)}</p>
+    </header>
+    <ul class="soon-list">
+      <li class="eva panel-dark" id="acqua-eva">
+        <figure class="eva-media"><img src="/assets/img/acqua-eva.jpg" alt="{get('eva.image_alt', lang)}" loading="lazy" width="733" height="1100"></figure>
+        <div class="eva-copy">
+          <p class="status" data-status="coming-soon"><span class="status-dot" aria-hidden="true"></span>{get("eva.status", lang)}</p>
+          <h3>{get("eva.title", lang)}</h3>
+          <p class="tagline">{get("eva.tagline", lang)}</p>
+          <p>{get("eva.body", lang)}</p>
+          <ul class="specs"><li>{get("eva.format", lang)}</li><li>{get("eva.case", lang)}</li></ul>
+          <ol class="release">
+            <li data-state="scheduled"><span class="cap cap-white" aria-hidden="true"></span><strong>{get("eva.still", lang)}</strong><span>{get("eva.still_when", lang)}</span></li>
+            <li data-state="later"><span class="cap cap-black" aria-hidden="true"></span><strong>{get("eva.sparkling", lang)}</strong><span>{get("eva.sparkling_when", lang)}</span></li>
+          </ol>
+          <a class="btn btn-gold" href="{home_path}?message={eva_prefill}#contact">{get("eva.cta", lang)} {icon("arrow")}</a>
+          <p class="fine">{get("eva.note", lang)}</p>
+        </div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<section class="section contact-sec" id="contact">
-  <div class="wrap contact">
-    <div class="contact-info">
-      <h2>{get("contact.title", lang)}</h2>
-      <p class="lead">{get("contact.lead", lang)}</p>
-      {contact_lines(lang)}
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact panel-dark">
+      <div class="contact-info">
+        <p class="eyebrow">{get("contact.eyebrow", lang)}</p>
+        <h2>{get("contact.title", lang)}</h2>
+        <p class="lead">{get("contact.lead", lang)}</p>
+        {contact_lines(lang)}
+      </div>
+      <form class="form" data-state="idle" data-endpoint="{endpoint}" method="post" action="{endpoint or '#'}"
+            data-item-prefix="{get('contact.item_prefix', lang)}">
+        <div class="form-fields">
+          <label><span>{get("contact.name", lang)}</span><input name="name" autocomplete="name" required></label>
+          <label><span>{get("contact.company", lang)}</span><input name="company" autocomplete="organization"></label>
+          <label><span>{get("contact.email", lang)}</span><input name="email" type="email" autocomplete="email" required></label>
+          <label><span>{get("contact.phone", lang)}</span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label class="full"><span>{get("contact.message", lang)}</span><textarea name="message" rows="4" required></textarea></label>
+          <input type="hidden" name="language" value="{lang}">
+          <button class="btn btn-gold full" type="submit">
+            <span class="when-idle">{get("contact.send", lang)} {icon("send")}</span>
+            <span class="when-sending">{get("contact.sending", lang)}</span>
+          </button>
+          <p class="form-error" role="alert">{icon("alert")} {get("contact.error", lang)}</p>
+        </div>
+        <div class="form-sent" role="status">
+          <span class="sent-icon">{icon("check")}</span>
+          <h3>{get("contact.sent_title", lang)}</h3>
+          <p>{get("contact.sent_body", lang)}</p>
+          <button class="btn btn-ghost-light" type="button" data-action="reset">{get("contact.again", lang)}</button>
+        </div>
+      </form>
     </div>
-    <form class="form" data-state="idle" data-endpoint="{endpoint}" method="post" action="{endpoint or '#'}">
-      <div class="form-fields">
-        <label><span>{get("contact.name", lang)}</span><input name="name" autocomplete="name" required></label>
-        <label><span>{get("contact.company", lang)}</span><input name="company" autocomplete="organization"></label>
-        <label><span>{get("contact.email", lang)}</span><input name="email" type="email" autocomplete="email" required></label>
-        <label><span>{get("contact.phone", lang)}</span><input name="phone" type="tel" autocomplete="tel"></label>
-        <label class="full"><span>{get("contact.message", lang)}</span><textarea name="message" rows="5" required></textarea></label>
-        <input type="hidden" name="language" value="{lang}">
-        <button class="btn btn-primary full" type="submit">
-          <span class="when-idle">{get("contact.send", lang)} {icon("send")}</span>
-          <span class="when-sending">{get("contact.sending", lang)}</span>
-        </button>
-        <p class="form-error" role="alert">{icon("alert")} {get("contact.error", lang)}</p>
-      </div>
-      <div class="form-sent" role="status">
-        <span class="sent-icon">{icon("check")}</span>
-        <h3>{get("contact.sent_title", lang)}</h3>
-        <p>{get("contact.sent_body", lang)}</p>
-        <button class="btn btn-line" type="button" data-action="reset">{get("contact.again", lang)}</button>
-      </div>
-    </form>
   </div>
 </section>"""
     return (head(lang, "home", get("meta.title", lang), get("meta.description", lang), json_ld(lang))
@@ -541,7 +581,7 @@ def catalogue(lang):
     body = f"""
 <section class="cat-hero">
   <div class="wrap">
-    <p class="kicker">{get("catalogue.eyebrow", lang)}</p>
+    <p class="eyebrow">{get("catalogue.eyebrow", lang)}</p>
     <h1>{get("catalogue.title", lang)}</h1>
     <p class="lead">{get("catalogue.lead", lang, count=COUNT, cats=len(CAT))}</p>
   </div>
@@ -565,7 +605,7 @@ def catalogue(lang):
       <p>{get("catalogue.empty_body", lang)}</p>
       <div class="row center">
         <a class="btn btn-primary empty-ask" href="{home_path}#contact">{get("catalogue.empty_cta", lang)} {icon("arrow")}</a>
-        <button class="btn btn-line" type="reset">{get("catalogue.clear", lang)}</button>
+        <button class="btn btn-ghost" type="reset">{get("catalogue.clear", lang)}</button>
       </div>
     </div>
   </div>

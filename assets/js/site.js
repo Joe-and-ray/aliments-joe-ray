@@ -35,11 +35,10 @@ function menu() {
 }
 
 function carousel() {
-  const rail = $("#reviews"), ctrl = $('[data-rail-ctrl="reviews"]');
+  const rail = $("#quotes"), ctrl = $('[data-rail-ctrl="quotes"]');
   if (!rail || !ctrl) return;
   const [prev, next] = $$("button", ctrl);
-  const step = () => rail.firstElementChild.offsetWidth + parseFloat(getComputedStyle(rail).columnGap);
-  const go = (dir) => rail.scrollBy({ left: dir * step(), behavior: "smooth" });
+  const go = (dir) => rail.scrollBy({ left: dir * (rail.firstElementChild.offsetWidth + 16), behavior: "smooth" });
   const sync = () => {
     prev.disabled = rail.scrollLeft < 4;
     next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
