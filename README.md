@@ -51,6 +51,12 @@ Every interactive piece keeps its state in a DOM attribute, so CSS styles it, an
 
 Deep links: `/product-catalogue/?q=burrata&cat=cheese`, `/?message=Hello#contact` (prefills the form).
 
+## Hero layouts
+
+Two hero layouts share one markup: `full` (photo edge to edge behind the headline) and `boxed` (text left, photo in a rounded frame right). The default is `site.hero_layout` in `copy.json`; preview the other with `/?hero=boxed` or `/?hero=full`.
+
+Photos `hero-cheese-warehouse.jpg` and `wholesale-salumi.jpg` are from Unsplash (free licence, no attribution required). Google reviews in `copy.json` → `reviews.google` are copied verbatim from the Google Business listing; update `rating`/`count` there when it changes.
+
 ## Client preview (GitHub Pages)
 
 Every push to `main` rebuilds and deploys the preview via `.github/workflows/pages.yml`.
