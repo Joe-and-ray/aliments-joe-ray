@@ -1,5 +1,6 @@
 // Les Aliments Joe & Ray. Progressive enhancement only: every page works without this file.
 // Each UI state machine is written to a data-state attribute so CSS, tests and agents can read it.
+//   html[data-hero]                     full | boxed      (set in <head> from ?hero=, before paint)
 //   html[data-scrolled]                 header: top -> scrolled
 //   .form[data-state]                   idle -> sending -> sent | error   (error -> sending on retry, sent -> idle on reset)
 //                                       placeholder endpoint (YOUR_FORM_ID) -> simulated "sent", nothing delivered
@@ -15,7 +16,7 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">"
 document.addEventListener("DOMContentLoaded", () => {
   header();
   menu();
-  posters();
+  carousel();
   contactForm();
   catalogue();
 });
@@ -33,17 +34,19 @@ function menu() {
   nav.addEventListener("click", (e) => { if (e.target.closest("a") && nav.matches(":popover-open")) nav.hidePopover(); });
 }
 
-function posters() {
-  const rail = $("#posters"), ctrl = $("[data-rail-ctrl]");
+function carousel() {
+  const rail = $("#reviews"), ctrl = $('[data-rail-ctrl="reviews"]');
   if (!rail || !ctrl) return;
   const [prev, next] = $$("button", ctrl);
+  const step = () => rail.firstElementChild.offsetWidth + parseFloat(getComputedStyle(rail).columnGap);
+  const go = (dir) => rail.scrollBy({ left: dir * step(), behavior: "smooth" });
   const sync = () => {
     prev.disabled = rail.scrollLeft < 4;
     next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
   };
-  ctrl.addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (b) rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * 0.8, behavior: "smooth" });
+  ctrl.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) go(+b.dataset.dir); });
+  rail.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); go(e.key === "ArrowRight" ? 1 : -1); }
   });
   rail.addEventListener("scroll", sync, { passive: true });
   addEventListener("resize", sync);

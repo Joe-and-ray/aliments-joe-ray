@@ -41,6 +41,7 @@ Every interactive piece keeps its state in a DOM attribute, so CSS styles it, an
 
 | Element               | Attribute          | States                                    |
 |-----------------------|--------------------|-------------------------------------------|
+| `<html>`              | `data-hero`        | `full \| boxed`: hero layout, from `?hero=boxed` (set in `<head>` before paint) |
 | `<html>`              | `data-scrolled`    | present once the page is scrolled         |
 | `#menu` (mobile nav)  | native `popover`   | `:popover-open`                           |
 | `.form` (contact)     | `data-state`       | `idle → sending → sent \| error`          |
@@ -56,8 +57,22 @@ Deep links: `/product-catalogue/?q=burrata&cat=cheese`, `/?message=Hello#contact
 Every push to `main` rebuilds and deploys the preview via `.github/workflows/pages.yml`.
 Pages serves it under `/<repo-name>/`, so the workflow builds with `SITE_BASE=/<repo-name>` (which also adds `noindex`).
 Locally, `python3 build.py` (no `SITE_BASE`) builds for the domain root as usual.
+Preview builds also show a small **Hero: Full-width / Boxed** switch (bottom left) so the client can compare the two hero layouts. Locally, add `?hero=boxed` to the URL.
+
+## Page order
+
+Announcement bar → header → hero → About us → trust bar → Products → Services → Brands → Testimonials (Google reviews + client quotes) → Wholesale → FAQ → Coming soon (Acqua eVa) → Contact.
+
+## Content sources
+
+- Copy follows the client's approved text on alimentsjoeandray.com (EN and /fr/). Blocks marked `_new` in `copy.json` (announcement, trust bar, wholesale, coming-soon intro) were written for the redesign from facts already on the site: **client must approve them**.
+- Google reviews in `testimonials.google_items` are copied verbatim from the Google Maps listing (4.5★, 13 reviews; only 3 have text). Update them by hand when new reviews come in.
+- Hero and wholesale photos are from Unsplash (free licence, no credit required): `hero-wide.jpg` (0aE3EGmC9kw), `hero-boxed.jpg` (34OrHR9jK6o), `wholesale.jpg` (yqu6tJkSQ_k).
 
 ## Before launch
 
 - [ ] **Contact form needs a working hook.** `site.form_endpoint` in `copy.json` is a **placeholder** (`https://formspree.io/f/YOUR_FORM_ID`). While it's there the form runs in prototype mode: it shows "Message sent" but **delivers nothing** (a console warning says so). Before launch, create the Formspree form on the client's inbox, paste its ID, rebuild, and send a real test message. Any service that accepts `POST` FormData and returns 2xx works.
+- [ ] **Pick the hero layout** (full-width or boxed), then delete the other `<img>` and its CSS block.
+- [ ] **Client approves the `_new` copy** in `copy.json`.
+- [ ] **Google listing** is named "Aliments Jos & Ray Inc" (typo). The client should fix it in Google Business Profile.
 - Deploy the folder root as-is. `/product-catalogue/` keeps the old site's URL.
