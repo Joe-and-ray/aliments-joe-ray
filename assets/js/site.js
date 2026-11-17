@@ -15,7 +15,8 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">"
 document.addEventListener("DOMContentLoaded", () => {
   header();
   menu();
-  posters();
+  heroLayout();
+  rails();
   contactForm();
   catalogue();
 });
@@ -33,21 +34,31 @@ function menu() {
   nav.addEventListener("click", (e) => { if (e.target.closest("a") && nav.matches(":popover-open")) nav.hidePopover(); });
 }
 
-function posters() {
-  const rail = $("#posters"), ctrl = $("[data-rail-ctrl]");
-  if (!rail || !ctrl) return;
-  const [prev, next] = $$("button", ctrl);
-  const sync = () => {
-    prev.disabled = rail.scrollLeft < 4;
-    next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
-  };
-  ctrl.addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (b) rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * 0.8, behavior: "smooth" });
-  });
-  rail.addEventListener("scroll", sync, { passive: true });
-  addEventListener("resize", sync);
-  sync();
+// preview switch for the client: ?hero=boxed | ?hero=full (default comes from copy.json site.hero_layout)
+function heroLayout() {
+  const h = new URLSearchParams(location.search).get("hero");
+  if (h === "full" || h === "boxed") $(".hero")?.setAttribute("data-hero", h);
+}
+
+// prev/next buttons for any scroll-snap rail: [data-rail-ctrl="<rail id>"]; one card per click
+function rails() {
+  for (const ctrl of $$("[data-rail-ctrl]")) {
+    const rail = document.getElementById(ctrl.dataset.railCtrl);
+    if (!rail) continue;
+    const [prev, next] = $$("button", ctrl);
+    const sync = () => {
+      prev.disabled = rail.scrollLeft < 4;
+      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
+    };
+    ctrl.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      const step = rail.firstElementChild?.getBoundingClientRect().width || rail.clientWidth;
+      if (b) rail.scrollBy({ left: +b.dataset.dir * (step + 16), behavior: "smooth" });
+    });
+    rail.addEventListener("scroll", sync, { passive: true });
+    addEventListener("resize", sync);
+    sync();
+  }
 }
 
 function contactForm() {
