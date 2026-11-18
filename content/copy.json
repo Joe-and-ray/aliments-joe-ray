@@ -54,8 +54,6 @@
   },
 
   "announce": {
-    "text": { "en": "Importing and distributing since 1954 · 2,000+ products for Quebec restaurants, pizzerias and retailers", "fr": "Importation et distribution depuis 1954 · Plus de 2 000 produits pour les restaurants, pizzerias et détaillants du Québec" },
-    "short": { "en": "2,000+ products in stock", "fr": "Plus de 2 000 produits" },
     "link": { "en": "Discover our catalogue", "fr": "Découvrir notre catalogue" }
   },
 
@@ -68,7 +66,7 @@
     },
     "cta_pricing": { "en": "Request wholesale pricing", "fr": "Faire une demande de prix" },
     "cta_catalogue": { "en": "Browse product catalogue", "fr": "Consulter le catalogue" },
-    "image_alt": { "en": "Two men unloading crates of fresh fruit from a delivery truck", "fr": "Deux hommes déchargent des caisses de fruits frais d’un camion de livraison" }
+    "image_alt": { "en": "Chefs at work in a restaurant kitchen, seen across the pass", "fr": "Des chefs au travail dans une cuisine de restaurant, vus depuis le passe" }
   },
 
   "trust": {
@@ -121,6 +119,7 @@
     "title": { "en": "Tailored solutions for the food industry.", "fr": "Des solutions sur mesure pour l’industrie alimentaire." },
     "items": [
       {
+        "icon": "truck",
         "title": { "en": "Food distribution", "fr": "Distribution alimentaire" },
         "body": {
           "en": "Delivering a diverse range of over 2,000 products, including local and imported deli meats, cheeses, and essential kitchen supplies.",
@@ -128,6 +127,7 @@
         }
       },
       {
+        "icon": "sourcing",
         "title": { "en": "Custom product sourcing", "fr": "Approvisionnement de produits personnalisés" },
         "body": {
           "en": "We work closely with suppliers to provide unique and specialty items tailored to your menu needs.",
@@ -135,6 +135,7 @@
         }
       },
       {
+        "icon": "shield",
         "title": { "en": "Food safety & compliance", "fr": "Sécurité alimentaire et conformité" },
         "body": {
           "en": "With a CFIA-approved import license, recall programs and product arrival controls, we make sure every product meets the highest safety standards.",
@@ -142,6 +143,7 @@
         }
       },
       {
+        "icon": "warehouse",
         "title": { "en": "Logistics & warehousing solutions", "fr": "Solutions de logistique et d’entreposage" },
         "body": {
           "en": "We offer streamlined storage and distribution services to keep your business running smoothly.",
@@ -300,7 +302,7 @@
     "who": { "en": "Restaurants|Pizzerias|Cafés & bakeries|Caterers|Grocers & delis|Institutions", "fr": "Restaurants|Pizzerias|Cafés et boulangeries|Traiteurs|Épiceries et délis|Institutions" },
     "cta": { "en": "Open a wholesale account", "fr": "Ouvrir un compte de gros" },
     "prefill": { "en": "I'd like to open a wholesale account.", "fr": "J’aimerais ouvrir un compte de gros." },
-    "image_alt": { "en": "Prosciutto and salami hanging to cure under a vaulted ceiling", "fr": "Prosciutto et salamis suspendus pour l’affinage sous une voûte" }
+    "image_alt": { "en": "A chef unpacking a tray of fresh fruit and vegetables in a restaurant kitchen", "fr": "Une cheffe déballe un plateau de fruits et légumes frais dans une cuisine de restaurant" }
   },
 
   "coming_soon": {
