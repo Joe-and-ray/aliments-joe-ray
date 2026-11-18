@@ -357,7 +357,10 @@ def home(lang):
         <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
       </div>
     </div>
-    <figure class="hero-media"><img src="/assets/img/hero-kitchen.jpg" alt="{get('hero.image_alt', lang)}" width="2000" height="1332" fetchpriority="high"></figure>
+    <figure class="hero-media">
+      <img src="/assets/img/hero-kitchen.jpg" alt="{get('hero.image_alt', lang)}" width="2000" height="1332" fetchpriority="high">
+      <a class="hero-card" href="#acqua-eva"><span><small>{get("eva.status", lang)}</small><strong>{get("eva.title", lang)}</strong></span>{icon("arrow")}</a>
+    </figure>
   </div>
 </section>
 
