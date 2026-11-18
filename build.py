@@ -147,6 +147,10 @@ SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 <symbol id="i-fax" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
 <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
 <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.6a1 1 0 0 0-.2-.6l-3.5-4.4a1 1 0 0 0-.8-.4H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+<symbol id="i-sourcing" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/><path d="M8 11h6M11 8v6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M22 8.4V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.4a2 2 0 0 1 1.3-1.9l8-3.2a2 2 0 0 1 1.4 0l8 3.2A2 2 0 0 1 22 8.4Z"/><path d="M6 18h12M6 14h12"/><path d="M6 22V10h12v12"/></symbol>
 </defs></svg>"""
 
 
@@ -172,7 +176,7 @@ def head(lang, page, title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{alt[lang]}">
-<meta property="og:image" content="{S['url']}/assets/img/hero-delivery.jpg">
+<meta property="og:image" content="{S['url']}/assets/img/hero-kitchen.jpg">
 <meta property="og:locale" content="{lang}_CA">
 <meta name="theme-color" content="#01563f">
 <link rel="icon" href="/assets/img/favicon.png">
@@ -189,8 +193,6 @@ def header(lang, page):
     home = PATHS["home"][lang]
     links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("testimonials", "#testimonials"), ("faq", "#faq")]
     nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
-    cat_current = ' aria-current="page"' if page == "catalogue" else ""
-    nav += f'<li><a href="{PATHS["catalogue"][lang]}"{cat_current}>{get("nav.catalogue", lang)}</a></li>'
     # one link to the other language, after the Contact button
     other = "fr" if lang == "en" else "en"
     lang_link = (f'<a class="lang" href="{PATHS[page][other]}" hreflang="{other}" lang="{other}" '
@@ -201,7 +203,6 @@ def header(lang, page):
 <header class="site-header">
   <div class="announce">
     <div class="wrap announce-in">
-      <p><span class="announce-long">{get("announce.text", lang)}</span><span class="announce-short">{get("announce.short", lang)}</span></p>
       <a href="{PATHS['catalogue'][lang]}">{get("announce.link", lang)} {icon("arrow")}</a>
     </div>
   </div>
@@ -271,7 +272,7 @@ def json_ld(lang):
     org = {
         "@context": "https://schema.org", "@type": "WholesaleStore", "name": S["name"], "legalName": S["legal"],
         "url": S["url"] + PATHS["home"][lang], "logo": S["url"] + "/assets/img/logo.png",
-        "image": S["url"] + "/assets/img/hero-delivery.jpg", "foundingDate": S["founded"],
+        "image": S["url"] + "/assets/img/hero-kitchen.jpg", "foundingDate": S["founded"],
         "telephone": "+1-" + S["phone_main"].replace(".", "-"), "faxNumber": "+1-" + S["fax"].replace(".", "-"),
         "description": C["meta"]["description"][lang], "areaServed": "Quebec",
         "address": {"@type": "PostalAddress", "streetAddress": S["street"], "addressLocality": "Saint-Léonard",
@@ -294,6 +295,7 @@ def home(lang):
 
     services = "".join(f"""
       <li class="service">
+        {icon(s["icon"], "i service-icon")}
         <h3>{tr(s["title"], lang)}</h3>
         <p>{tr(s["body"], lang)}</p>
       </li>""" for s in C["services"]["items"])
@@ -355,7 +357,7 @@ def home(lang):
         <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
       </div>
     </div>
-    <figure class="hero-media"><img src="/assets/img/hero-delivery.jpg" alt="{get('hero.image_alt', lang)}" width="2400" height="1600" fetchpriority="high"></figure>
+    <figure class="hero-media"><img src="/assets/img/hero-kitchen.jpg" alt="{get('hero.image_alt', lang)}" width="2000" height="1332" fetchpriority="high"></figure>
   </div>
 </section>
 
@@ -419,8 +421,8 @@ def home(lang):
         <span><span class="stars" style="--r:{R['rating']}" aria-label="{R['rating']} / 5"></span><small>{get("reviews.summary", lang, count=R['count'])}</small></span>
       </a>
     </header>
+    <ul class="review-track" id="reviews" tabindex="0" aria-label="{get('testimonials.title', lang)}">{reviews}</ul>
   </div>
-  <ul class="review-track" id="reviews" tabindex="0" aria-label="{get('testimonials.title', lang)}">{reviews}</ul>
   <div class="wrap carousel-foot">
     <div class="rail-ctrl" data-rail-ctrl="reviews">
       <button class="icon-btn" data-dir="-1" aria-label="{get('reviews.prev', lang)}">{icon("left")}</button>
@@ -433,7 +435,7 @@ def home(lang):
 <section class="section" id="wholesale">
   <div class="wrap">
     <div class="wholesale">
-      <figure class="wholesale-media"><img src="/assets/img/wholesale-salumi.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="1600" height="1067"></figure>
+      <figure class="wholesale-media"><img src="/assets/img/wholesale-chef.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="2000" height="1331"></figure>
       <div class="wholesale-copy">
         <p class="eyebrow">{get("wholesale.eyebrow", lang)}</p>
         <h2>{get("wholesale.title", lang)}</h2>
@@ -447,18 +449,6 @@ def home(lang):
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="faq">
-  <div class="wrap faq-grid">
-    <div class="faq-aside">
-      <p class="eyebrow">{get("faq.eyebrow", lang)}</p>
-      <h2>{get("faq.title", lang)}</h2>
-      <p class="muted">{get("faq.lead", lang)}</p>
-      <p class="muted">{get("faq.aside", lang)} <a href="{tel(S['phone_main'])}">{S['phone_main']}</a></p>
-    </div>
-    <div class="faq-list">{faqs}</div>
   </div>
 </section>
 
@@ -485,6 +475,18 @@ def home(lang):
         <p class="fine">{get("eva.note", lang)}</p>
       </div>
     </article>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-aside">
+      <p class="eyebrow">{get("faq.eyebrow", lang)}</p>
+      <h2>{get("faq.title", lang)}</h2>
+      <p class="muted">{get("faq.lead", lang)}</p>
+      <p class="muted">{get("faq.aside", lang)} <a href="{tel(S['phone_main'])}">{S['phone_main']}</a></p>
+    </div>
+    <div class="faq-list">{faqs}</div>
   </div>
 </section>
 
