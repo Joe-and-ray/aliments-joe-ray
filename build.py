@@ -363,7 +363,7 @@ def home(lang):
     </div>
     <figure class="hero-media">
       <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" {load("full")}>
-      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1254" height="1254" {load("boxed")}>
+      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1672" height="941" {load("boxed")}>
     </figure>
   </div>
 </section>
