@@ -310,10 +310,10 @@ def home(lang):
 
     services = "".join(f"""
       <li class="service">
-        <span class="service-top">{icon(s["icon"], "i service-icon")}<span class="service-num" aria-hidden="true">0{n}</span></span>
+        <span class="service-top">{icon(s["icon"], "i service-icon")}</span>
         <h3>{tr(s["title"], lang)}</h3>
         <p>{tr(s["body"], lang)}</p>
-      </li>""" for n, s in enumerate(C["services"]["items"], 1))
+      </li>""" for s in C["services"]["items"])
 
     about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["paragraphs"])
     # the default layout's hero photo loads first; the other one only when previewed (?hero=)
