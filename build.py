@@ -229,8 +229,8 @@ def header(lang, page):
 
 def footer(lang):
     home = PATHS["home"][lang]
-    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("wholesale", "#wholesale"),
-             ("testimonials", "#testimonials"), ("coming_soon", "#coming-soon"), ("faq", "#faq")]
+    links = [("about", "#about"), ("services", "#services"), ("products", "#products"), ("testimonials", "#testimonials"),
+             ("wholesale", "#wholesale"), ("coming_soon", "#coming-soon"), ("faq", "#faq")]
     nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
     nav += f'<li><a href="{PATHS["catalogue"][lang]}">{get("nav.catalogue", lang)}</a></li>'
     other = "fr" if lang == "en" else "en"
