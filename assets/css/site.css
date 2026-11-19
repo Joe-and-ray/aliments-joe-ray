@@ -166,7 +166,6 @@ html[data-scrolled] .brand { --logo: 70px; margin-top: 5px; padding: 3px; box-sh
 .brands-head p { color: var(--muted); font-size: .95rem; }
 .logo-rail { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .logo-track { display: flex; align-items: center; width: max-content; gap: 48px; animation: marquee 60s linear infinite; }
-.logo-rail:hover .logo-track, .logo-rail:focus-within .logo-track { animation-play-state: paused; }
 .logo-track a { display: grid; place-items: center; width: 140px; height: 80px; }
 .logo-track img { max-height: 64px; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: grayscale(1); opacity: .75; transition: filter .2s, opacity .2s; }
 .logo-track a:hover img, .logo-track a:focus-visible img { filter: none; opacity: 1; }
