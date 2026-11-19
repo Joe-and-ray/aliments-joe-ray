@@ -218,7 +218,7 @@ def header(lang, page):
       </div>
     </nav>
     <div class="bar-actions">
-      <a class="btn btn-primary hide-sm" href="{home}#contact">{get("nav.contact", lang)}</a>
+      <a class="btn btn-outline hide-sm" href="{home}#contact">{get("nav.contact", lang)}</a>
       {lang_link}
       <button class="icon-btn menu-btn" popovertarget="menu" aria-label="{get('nav.menu', lang)}">{icon("menu")}</button>
     </div>

@@ -72,6 +72,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .btn-primary:hover { background: var(--red-700); }
 .btn-ghost { border-color: var(--line); background: transparent; color: var(--ink); }
 .btn-ghost:hover { border-color: var(--ink); }
+/* secondary action in brand green, so the red catalogue button stays the one main CTA */
+.btn-outline { border: 1.5px solid var(--green-800); background: transparent; color: var(--green-800); }
+.btn-outline:hover { background: var(--green-50); }
 .btn-light { background: #fff; color: var(--green-900); }
 .btn-light:hover { background: var(--green-50); }
 .btn-ghost-light { border-color: var(--line-light); color: #fff; background: transparent; }
