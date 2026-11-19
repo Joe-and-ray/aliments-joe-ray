@@ -193,8 +193,8 @@ def head(lang, page, title, desc, extra=""):
 
 def header(lang, page):
     home = PATHS["home"][lang]
-    links = [("about", home + "#about"), ("products", home + "#products"), ("services", home + "#services"),
-             ("catalogue", PATHS["catalogue"][lang]), ("testimonials", home + "#testimonials"), ("faq", home + "#faq")]
+    links = [("about", home + "#about"), ("catalogue", PATHS["catalogue"][lang]), ("products", home + "#products"),
+             ("services", home + "#services"), ("faq", home + "#faq")]
     cur = lambda k: ' aria-current="page"' if k == page else ""
     nav = "".join(f'<li><a href="{h}"{cur(k)}>{get("nav." + k, lang)}</a></li>' for k, h in links)
     # one link to the other language, after the Contact button
@@ -393,10 +393,7 @@ def home(lang):
 
 <section class="section about" id="about">
   <div class="wrap about-grid">
-    <div class="about-media">
-      <figure><img src="/assets/img/history-1.jpg" alt="{tr(C['about']['image_alts'][0], lang)}" loading="lazy" width="469" height="435"></figure>
-      <figure><img src="/assets/img/history-2.jpg" alt="{tr(C['about']['image_alts'][1], lang)}" loading="lazy" width="506" height="450"></figure>
-    </div>
+    <figure class="about-media"><img src="{v('/assets/img/history.jpg')}" alt="{get('about.image_alt', lang)}" loading="lazy" width="1100" height="821"></figure>
     <div class="about-copy">
       <p class="eyebrow">{get("about.eyebrow", lang)}</p>
       <h2>{about_title}</h2>
@@ -427,7 +424,7 @@ def home(lang):
         <h2>{get("intro.title", lang)}</h2>
         <p class="lead">{get("intro.body", lang)} {get("products.lead", lang)}</p>
       </div>
-      <a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} {icon("arrow")}</a>
+      <a class="btn btn-primary" href="{cat}">{get("products.all", lang)} {icon("arrow")}</a>
     </header>
     <ul class="product-grid">{prods}</ul>
   </div>

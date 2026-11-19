@@ -165,10 +165,11 @@
   "about": {
     "eyebrow": { "en": "About us", "fr": "À propos" },
     "title": { "en": "Three generations. It started with pepperoni.", "fr": "Trois générations. Tout a commencé avec du pepperoni." },
-    "image_alts": [
-      { "en": "Archive photo: a man in a white coat beside an early Joe & Ray delivery van", "fr": "Photo d’archives : un homme en sarrau blanc près d’une des premières camionnettes Joe & Ray" },
-      { "en": "Archive photo: a Joe & Ray delivery van lettered with pepperoni and salami", "fr": "Photo d’archives : une camionnette Joe & Ray lettrée « pepperoni, salami »" }
-    ],
+    "image_alt": {
+      "en": "Black-and-white photo of two men in white work coats standing beside an early delivery van",
+      "fr": "Photo noir et blanc de deux hommes en sarrau blanc devant une ancienne camionnette de livraison"
+    },
+    "_image_note": "history.jpg is an AI-generated composite (Higgsfield) made from two archive photos of the van drivers. Have the client confirm it before launch.",
     "paragraphs": [
       {
         "en": "In 1954, Giuseppe “Joe” and Raymond “Ray” Teolis began delivering fresh pepperoni to neighbourhood pizzerias. Those early customers helped shape the business that became Les Aliments Joe & Ray.",
