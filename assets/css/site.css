@@ -136,8 +136,8 @@ html[data-scrolled] .site-header { border-bottom-color: var(--line); }
 .hero[data-hero="full"] .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(8 30 22 / .82) 0%, rgb(8 30 22 / .5) 45%, rgb(8 30 22 / 0) 75%); }
 .hero[data-hero="full"] .hero-copy { max-width: 680px; }
 .hero-stats { display: none; }
-.hero[data-hero="full"] .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid rgb(255 255 255 / .25); }
-.hero-stats li { display: flex; flex-direction: column; gap: 4px; padding: 22px 24px 0 0; }
+.hero[data-hero="full"] .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin-top: clamp(32px, 4vw, 48px); }
+.hero-stats li { display: flex; flex-direction: column; gap: 4px; padding: 0 24px 0 0; }
 .hero-stats li + li { padding-left: 24px; border-left: 1px solid rgb(255 255 255 / .25); }
 .hero-stats strong { font-family: var(--display); font-variation-settings: "wdth" 112; font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1; letter-spacing: -.03em; color: #fff; }
 .hero-stats span { font-size: .9rem; color: rgb(255 255 255 / .78); }
@@ -360,7 +360,8 @@ details[open] .faq-icon { transform: rotate(45deg); background: var(--ink); bord
 /* footer */
 .site-footer { background: var(--green-800); color: rgb(255 255 255 / .8); padding: 72px 0 28px; font-size: .95rem; }
 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; }
-.foot-logo { width: 110px; margin-bottom: 18px; } /* the PNG carries its own white circle: reads as a badge on the green */
+/* logo.png's white disc is clipped by the image edge: a slightly larger CSS circle behind it completes it */
+.foot-logo { width: 120px; height: 120px; padding: 12px; object-fit: contain; background: #fff; border-radius: 50%; margin-bottom: 20px; }
 .site-footer .muted { max-width: 36ch; color: rgb(255 255 255 / .75); }
 .foot-h { font-family: var(--display); font-size: .95rem; font-weight: 600; letter-spacing: 0; margin-bottom: 16px; color: #fff; }
 .foot-links { display: grid; gap: 8px; }
@@ -463,7 +464,7 @@ mark { background: #fbe7a1; color: inherit; border-radius: 3px; padding: 0 1px; 
   .row .btn { flex: 1 1 auto; }
 
   .hero[data-hero="full"] { min-height: 0; padding: 140px 0 40px; }
-  .hero-stats li { padding: 16px 10px 0 0; }
+  .hero-stats li { padding: 0 10px 0 0; }
   .hero-stats li + li { padding-left: 10px; }
   .hero-stats span { font-size: .78rem; line-height: 1.35; }
   .hero[data-hero="full"] .hero-media::after { background: linear-gradient(0deg, rgb(8 30 22 / .92) 0%, rgb(8 30 22 / .7) 55%, rgb(8 30 22 / .25) 100%); }
