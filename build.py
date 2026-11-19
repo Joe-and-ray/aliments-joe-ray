@@ -290,8 +290,12 @@ def home(lang):
     home_path = PATHS["home"][lang]
     R = C["reviews"]
 
-    trust = "".join(f'<li><strong>{tr(t["value"], lang)}</strong><span>{tr(t["label"], lang)}</span></li>'
-                    for t in C["trust"]["items"])
+    # stats: full row under About (boxed version); three of them in the hero (full version)
+    industries = len(C["wholesale"]["who"]["en"].split("|"))
+    stat = lambda t: f'<li><strong>{tr(t["value"], lang, industries=industries)}</strong><span>{tr(t["label"], lang)}</span></li>'
+    stats = {t["key"]: t for t in C["trust"]["items"]}
+    trust = "".join(stat(t) for t in C["trust"]["items"])
+    hero_stats = "".join(stat(stats[k]) for k in C["trust"]["hero_order"])
 
     services = "".join(f"""
       <li class="service">
@@ -330,6 +334,7 @@ def home(lang):
     cards = [(r["who"], escape(r["text"]), get("reviews.google_label", lang), True) for r in R["google"]]
     cards += [(t["who"], tr(t["quote"], lang), " · ".join(x for x in (escape(t["where"]), escape(since(t["since"]))) if x), False)
               for t in C["testimonials"]["items"]]
+    cards.sort(key=lambda c: len(c[1]), reverse=True)  # fullest reviews first
     reviews = "".join(f"""
       <li class="review"{' data-source="google"' if g else ''}>
         <blockquote><p>{text}</p></blockquote>
@@ -360,6 +365,7 @@ def home(lang):
         <a class="btn btn-primary" href="{cat}">{get("hero.cta_catalogue", lang)} {icon("arrow")}</a>
         <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
       </div>
+      <ul class="hero-stats" aria-label="{get('trust.label', lang)}">{hero_stats}</ul>
     </div>
     <figure class="hero-media">
       <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" {load("full")}>

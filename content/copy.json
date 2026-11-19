@@ -73,11 +73,13 @@
   "trust": {
     "label": { "en": "Les Aliments Joe & Ray in numbers", "fr": "Les Aliments Joe & Ray en chiffres" },
     "items": [
-      { "value": { "en": "70+", "fr": "70+" }, "label": { "en": "years serving Quebec", "fr": "ans au service du Québec" } },
-      { "value": { "en": "3rd", "fr": "3e" }, "label": { "en": "generation, family-owned", "fr": "génération, entreprise familiale" } },
-      { "value": { "en": "2,000+", "fr": "2 000+" }, "label": { "en": "products, local and imported", "fr": "produits locaux et importés" } },
-      { "value": { "en": "CFIA", "fr": "ACIA" }, "label": { "en": "licensed importer", "fr": "importateur licencié" } }
-    ]
+      { "key": "years", "value": { "en": "70+", "fr": "70+" }, "label": { "en": "years serving Quebec", "fr": "ans au service du Québec" } },
+      { "key": "industries", "value": { "en": "{industries}", "fr": "{industries}" }, "label": { "en": "industries served", "fr": "secteurs desservis" } },
+      { "key": "products", "value": { "en": "2,000+", "fr": "2 000+" }, "label": { "en": "products, local and imported", "fr": "produits locaux et importés" } },
+      { "key": "cfia", "value": { "en": "CFIA", "fr": "ACIA" }, "label": { "en": "licensed importer", "fr": "importateur licencié" } }
+    ],
+    "_industries_note": "{industries} is the number of entries in wholesale.who (the We supply list).",
+    "hero_order": ["products", "cfia", "industries"]
   },
 
   "intro": {
