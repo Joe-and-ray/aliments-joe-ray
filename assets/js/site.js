@@ -35,9 +35,29 @@ function menu() {
 }
 
 // preview switch for the client: ?hero=boxed | ?hero=full (default comes from copy.json site.hero_layout)
+// The choice sticks for the tab: it is remembered, and added to every internal link on click,
+// so menu anchors, the language link and the catalogue keep showing the same version.
+function heroChoice() {
+  const ok = (h) => (h === "full" || h === "boxed" ? h : null);
+  const fromUrl = ok(new URLSearchParams(location.search).get("hero"));
+  try {
+    if (fromUrl) sessionStorage.setItem("hero", fromUrl);
+    return fromUrl || ok(sessionStorage.getItem("hero"));
+  } catch { return fromUrl; }
+}
+
 function heroLayout() {
-  const h = new URLSearchParams(location.search).get("hero");
-  if (h === "full" || h === "boxed") $(".hero")?.setAttribute("data-hero", h);
+  const h = heroChoice();
+  if (!h) return;
+  $(".hero")?.setAttribute("data-hero", h);
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || a.origin !== location.origin || /\.(?!html?$)\w+$/.test(a.pathname)) return;
+    const u = new URL(a.href);
+    if (u.searchParams.get("hero") === h) return;
+    u.searchParams.set("hero", h);
+    a.href = u.href;
+  }, true);
 }
 
 // prev/next buttons for any scroll-snap rail: [data-rail-ctrl="<rail id>"]; one card per click
@@ -156,6 +176,8 @@ function catalogue() {
     const p = new URLSearchParams();
     if (q) p.set("q", q);
     if (cat) p.set("cat", cat);
+    const hero = heroChoice();
+    if (hero) p.set("hero", hero);
     history.replaceState(null, "", p.toString() ? "?" + p : location.pathname);
   }
 
