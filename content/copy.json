@@ -67,7 +67,7 @@
     "cta_pricing": { "en": "Request wholesale pricing", "fr": "Faire une demande de prix" },
     "cta_catalogue": { "en": "Browse product catalogue", "fr": "Consulter le catalogue" },
     "image_alt": { "en": "Two chefs plating burrata, tomatoes and pasta at a stainless steel kitchen counter", "fr": "Deux chefs dressent de la burrata, des tomates et des pâtes sur un comptoir en inox" },
-    "image_alt_boxed": { "en": "Two warehouse staff checking an order sheet beside pallets of food products", "fr": "Deux employés d’entrepôt vérifient un bon de commande près de palettes de produits alimentaires" }
+    "image_alt_boxed": { "en": "Two warehouse staff reviewing an order on a clipboard beside pallets and shelves of food products", "fr": "Deux employés d’entrepôt révisent une commande sur une planchette, près de palettes et d’étagères de produits alimentaires" }
   },
 
   "trust": {

@@ -301,6 +301,8 @@ def home(lang):
       </li>""" for s in C["services"]["items"])
 
     about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["paragraphs"])
+    # the default layout's hero photo loads first; the other one only when previewed (?hero=)
+    load = lambda layout: 'fetchpriority="high"' if S.get("hero_layout", "full") == layout else 'loading="lazy"'
     # one line per sentence: "Three generations." / "It started with pepperoni."
     about_title = "".join(f"<span>{x}</span>" for x in re.split(r"(?<=\.) ", get("about.title", lang)))
 
@@ -360,8 +362,8 @@ def home(lang):
       </div>
     </div>
     <figure class="hero-media">
-      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" fetchpriority="high">
-      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1774" height="887" loading="lazy">
+      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" {load("full")}>
+      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1254" height="1254" {load("boxed")}>
     </figure>
   </div>
 </section>
