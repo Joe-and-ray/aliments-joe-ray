@@ -203,7 +203,7 @@ def header(lang, page):
 <header class="site-header">
   <div class="announce">
     <div class="wrap announce-in">
-      <a href="{PATHS['catalogue'][lang]}">{get("announce.link", lang)} {icon("arrow")}</a>
+      <a href="{home}#coming-soon">{get("announce.link", lang)} {icon("arrow")}</a>
     </div>
   </div>
   <div class="wrap bar">
@@ -363,7 +363,6 @@ def home(lang):
       <p class="lead">{get("hero.lead", lang)}</p>
       <div class="row">
         <a class="btn btn-primary" href="{cat}">{get("hero.cta_catalogue", lang)} {icon("arrow")}</a>
-        <a class="btn btn-ghost" href="#contact">{get("hero.cta_pricing", lang)}</a>
       </div>
       <ul class="hero-stats" aria-label="{get('trust.label', lang)}">{hero_stats}</ul>
     </div>

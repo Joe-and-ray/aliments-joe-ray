@@ -54,7 +54,7 @@
   },
 
   "announce": {
-    "link": { "en": "Discover our catalogue", "fr": "Découvrir notre catalogue" }
+    "link": { "en": "Coming soon: Acqua eVa, exclusive in Canada", "fr": "Bientôt : Acqua eVa, en exclusivité au Canada" }
   },
 
   "hero": {
@@ -64,7 +64,6 @@
       "en": "Delivering quality food products to restaurants and pizzerias across Quebec and beyond.",
       "fr": "Des produits alimentaires de qualité livrés aux restaurants et pizzerias partout au Québec et au-delà."
     },
-    "cta_pricing": { "en": "Request wholesale pricing", "fr": "Faire une demande de prix" },
     "cta_catalogue": { "en": "Browse product catalogue", "fr": "Consulter le catalogue" },
     "image_alt": { "en": "Two chefs plating burrata, tomatoes and pasta at a stainless steel kitchen counter", "fr": "Deux chefs dressent de la burrata, des tomates et des pâtes sur un comptoir en inox" },
     "image_alt_boxed": { "en": "Two warehouse staff reviewing an order on a clipboard beside pallets and shelves of food products", "fr": "Deux employés d’entrepôt révisent une commande sur une planchette, près de palettes et d’étagères de produits alimentaires" }
