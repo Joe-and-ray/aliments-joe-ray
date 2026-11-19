@@ -55,9 +55,9 @@ Deep links: `/product-catalogue/?q=burrata&cat=cheese`, `/?message=Hello#contact
 
 Two hero layouts share one markup: `full` (photo edge to edge behind the headline) and `boxed` (text left, photo in a rounded frame right).
 
-Home page order: hero → brand logos → about → trust bar → products mosaic → services → reviews → wholesale → coming soon (Acqua eVa) → FAQ → contact. The products mosaic shows every item in `products.items`; tile sizes come from position (1st is the large tile), so keep it at 8 items or adjust `.mosaic` in `site.css`. The default is `site.hero_layout` in `copy.json`; preview the other with `/?hero=boxed` or `/?hero=full`.
+Home page order: hero → brand logos → about → trust bar → services → products mosaic → reviews → wholesale → coming soon (Acqua eVa) → FAQ → contact. The products mosaic shows every item in `products.items`; tile sizes come from position (1st is the large tile), so keep it at 8 items or adjust `.mosaic` in `site.css`. The default is `site.hero_layout` in `copy.json`; preview the other with `/?hero=boxed` or `/?hero=full`.
 
-Photos `hero-kitchen.jpg` (hero) and `wholesale-chef.jpg` (wholesale) were supplied by the client team. Google reviews in `copy.json` → `reviews.google` are copied verbatim from the Google Business listing; update `rating`/`count` there when it changes.
+Photos `hero-full.webp` (full-width hero), `hero-boxed.webp` (boxed hero) and `wholesale-chef.jpg` (wholesale) were supplied by the client team. Each hero layout shows its own photo. Google reviews in `copy.json` → `reviews.google` are copied verbatim from the Google Business listing; update `rating`/`count` there when it changes.
 
 ## Client preview (GitHub Pages)
 

@@ -176,7 +176,7 @@ def head(lang, page, title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{alt[lang]}">
-<meta property="og:image" content="{S['url']}/assets/img/hero-kitchen.jpg">
+<meta property="og:image" content="{S['url']}/assets/img/hero-full.webp">
 <meta property="og:locale" content="{lang}_CA">
 <meta name="theme-color" content="#01563f">
 <link rel="icon" href="/assets/img/favicon.png">
@@ -272,7 +272,7 @@ def json_ld(lang):
     org = {
         "@context": "https://schema.org", "@type": "WholesaleStore", "name": S["name"], "legalName": S["legal"],
         "url": S["url"] + PATHS["home"][lang], "logo": S["url"] + "/assets/img/logo.png",
-        "image": S["url"] + "/assets/img/hero-kitchen.jpg", "foundingDate": S["founded"],
+        "image": S["url"] + "/assets/img/hero-full.webp", "foundingDate": S["founded"],
         "telephone": "+1-" + S["phone_main"].replace(".", "-"), "faxNumber": "+1-" + S["fax"].replace(".", "-"),
         "description": C["meta"]["description"][lang], "areaServed": "Quebec",
         "address": {"@type": "PostalAddress", "streetAddress": S["street"], "addressLocality": "Saint-Léonard",
@@ -358,8 +358,8 @@ def home(lang):
       </div>
     </div>
     <figure class="hero-media">
-      <img src="/assets/img/hero-kitchen.jpg" alt="{get('hero.image_alt', lang)}" width="2000" height="1332" fetchpriority="high">
-      <a class="hero-card" href="#acqua-eva"><span><small>{get("eva.status", lang)}</small><strong>{get("eva.title", lang)}</strong></span>{icon("arrow")}</a>
+      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1672" height="941" fetchpriority="high">
+      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1774" height="887" loading="lazy">
     </figure>
   </div>
 </section>
@@ -387,6 +387,16 @@ def home(lang):
   <div class="wrap"><ul class="trust-list">{trust}</ul></div>
 </section>
 
+<section class="section" id="services">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">{get("services.eyebrow", lang)}</p>
+      <h2>{get("services.title", lang)}</h2>
+    </header>
+    <ul class="services">{services}</ul>
+  </div>
+</section>
+
 <section class="section products-section" id="products">
   <div class="wrap">
     <header class="section-head split">
@@ -398,16 +408,6 @@ def home(lang):
       <a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} {icon("arrow")}</a>
     </header>
     <ul class="mosaic">{prods}</ul>
-  </div>
-</section>
-
-<section class="section" id="services">
-  <div class="wrap">
-    <header class="section-head">
-      <p class="eyebrow">{get("services.eyebrow", lang)}</p>
-      <h2>{get("services.title", lang)}</h2>
-    </header>
-    <ul class="services">{services}</ul>
   </div>
 </section>
 
@@ -448,7 +448,6 @@ def home(lang):
         <ul class="who-list">{who}</ul>
         <div class="row">
           <a class="btn btn-primary" href="{home_path}?message={ws_prefill}#contact">{get("wholesale.cta", lang)} {icon("arrow")}</a>
-          <a class="btn btn-ghost" href="{tel(S['phone_main'])}">{S['phone_main']}</a>
         </div>
       </div>
     </div>

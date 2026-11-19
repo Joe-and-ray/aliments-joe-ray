@@ -66,7 +66,8 @@
     },
     "cta_pricing": { "en": "Request wholesale pricing", "fr": "Faire une demande de prix" },
     "cta_catalogue": { "en": "Browse product catalogue", "fr": "Consulter le catalogue" },
-    "image_alt": { "en": "Chefs at work in a restaurant kitchen, seen across the pass", "fr": "Des chefs au travail dans une cuisine de restaurant, vus depuis le passe" }
+    "image_alt": { "en": "Two chefs plating burrata and prosciutto at a restaurant kitchen counter", "fr": "Deux chefs dressent de la burrata et du prosciutto au comptoir d’une cuisine de restaurant" },
+    "image_alt_boxed": { "en": "Two warehouse staff checking an order sheet beside pallets of food products", "fr": "Deux employés d’entrepôt vérifient un bon de commande près de palettes de produits alimentaires" }
   },
 
   "trust": {
@@ -300,8 +301,8 @@
     ],
     "who_title": { "en": "We supply", "fr": "Nous approvisionnons" },
     "who": { "en": "Restaurants|Pizzerias|Cafés & bakeries|Caterers|Grocers & delis|Institutions", "fr": "Restaurants|Pizzerias|Cafés et boulangeries|Traiteurs|Épiceries et délis|Institutions" },
-    "cta": { "en": "Open a wholesale account", "fr": "Ouvrir un compte de gros" },
-    "prefill": { "en": "I'd like to open a wholesale account.", "fr": "J’aimerais ouvrir un compte de gros." },
+    "cta": { "en": "Request wholesale pricing", "fr": "Demander nos prix de gros" },
+    "prefill": { "en": "I'd like to request wholesale pricing.", "fr": "J’aimerais recevoir vos prix de gros." },
     "image_alt": { "en": "A chef unpacking a tray of fresh fruit and vegetables in a restaurant kitchen", "fr": "Une cheffe déballe un plateau de fruits et légumes frais dans une cuisine de restaurant" }
   },
 
