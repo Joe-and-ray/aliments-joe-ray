@@ -301,6 +301,8 @@ def home(lang):
       </li>""" for s in C["services"]["items"])
 
     about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["paragraphs"])
+    # one line per sentence: "Three generations." / "It started with pepperoni."
+    about_title = "".join(f"<span>{x}</span>" for x in re.split(r"(?<=\.) ", get("about.title", lang)))
 
     logo = lambda b, dup: (f"""<li{' aria-hidden="true"' if dup else ''}><a href="{b['url']}" target="_blank" rel="noopener" title="{escape(b['name'])}"{' tabindex="-1"' if dup else ''}>"""
                            f"""<img src="/assets/img/brands/{b['logo']}" alt="{'' if dup else escape(b['name'])}" loading="lazy"></a></li>""")
@@ -312,7 +314,7 @@ def home(lang):
     prods = "".join(f"""
       <li class="tile">
         <a href="{cat}?q={quote(p['q'])}">
-          <img src="/assets/img/products/{p['img']}" alt="" loading="lazy">
+          <span class="tile-img"><img src="/assets/img/products/{p['img']}" alt="" loading="lazy"></span>
           <span class="tile-cap"><span class="tile-name">{tr(p['name'], lang)}</span><span class="tile-meta">{tr(p['origin'], lang)}<span class="tile-ask">{ask} {icon("arrow")}</span></span></span>
         </a>
       </li>""" for p in C["products"]["items"])
@@ -358,7 +360,7 @@ def home(lang):
       </div>
     </div>
     <figure class="hero-media">
-      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1672" height="941" fetchpriority="high">
+      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" fetchpriority="high">
       <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1774" height="887" loading="lazy">
     </figure>
   </div>
@@ -377,7 +379,7 @@ def home(lang):
     <figure class="about-media"><img src="/assets/img/history.jpg" alt="{get('about.image_alt', lang)}" loading="lazy" width="1019" height="1100"></figure>
     <div class="about-copy">
       <p class="eyebrow">{get("about.eyebrow", lang)}</p>
-      <h2>{get("about.title", lang)}</h2>
+      <h2>{about_title}</h2>
       {about}
     </div>
   </div>
