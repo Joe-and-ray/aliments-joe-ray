@@ -212,7 +212,7 @@ def header(lang, page):
   </div>
   <div class="wrap bar">
     <a class="brand" href="{home}" aria-label="{escape(S['name'])}">
-      <img src="/assets/img/logo-mark.png" alt="" width="508" height="508">
+      <img src="{v('/assets/img/logo-mark.png')}" alt="" width="508" height="508">
     </a>
     <nav class="nav" id="menu" popover aria-label="Main">
       <button class="icon-btn nav-close" popovertarget="menu" popovertargetaction="hide" aria-label="{get('nav.close', lang)}">{icon("x")}</button>
@@ -242,7 +242,7 @@ def footer(lang):
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div>
-      <img class="foot-logo" src="/assets/img/logo-mark.png" alt="{escape(S['name'])}" width="120" height="120" loading="lazy">
+      <img class="foot-logo" src="{v('/assets/img/logo-mark.png')}" alt="{escape(S['name'])}" width="120" height="120" loading="lazy">
       <p class="muted">{get("footer.tagline", lang)}</p>
       {social(lang)}
     </div>
@@ -326,13 +326,12 @@ def home(lang):
     # second copy makes the marquee loop seamlessly; hidden from AT and tab order
     logos = "".join(logo(b, False) for b in C["brands"]["items"]) + "".join(logo(b, True) for b in C["brands"]["items"])
 
-    # product grid: every featured product at once. The whole photo shows; a blurred copy behind it
-    # fills any space left by photos that are wider than the tile
+    # product grid: every featured product at once; each photo fills its tile
     ask = get("products.ask", lang)
     prods = "".join(f"""
       <li class="tile">
         <a href="{cat}?q={quote(p['q'])}">
-          <span class="tile-img"><img class="tile-bg" src="/assets/img/products/{p['img']}" alt="" aria-hidden="true" loading="lazy"><img src="/assets/img/products/{p['img']}" alt="" loading="lazy"></span>
+          <span class="tile-img"><img src="{v('/assets/img/products/' + p['img'])}" alt="" loading="lazy"></span>
           <span class="tile-cap"><span class="tile-name">{tr(p['name'], lang)}</span><span class="tile-meta">{tr(p['origin'], lang)}<span class="tile-ask">{ask} {icon("arrow")}</span></span></span>
         </a>
       </li>""" for p in C["products"]["items"])
