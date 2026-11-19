@@ -212,7 +212,7 @@ def header(lang, page):
   </div>
   <div class="wrap bar">
     <a class="brand" href="{home}" aria-label="{escape(S['name'])}">
-      <img src="/assets/img/logo.png" alt="" width="644" height="584">
+      <img src="/assets/img/logo-mark.png" alt="" width="508" height="508">
     </a>
     <nav class="nav" id="menu" popover aria-label="Main">
       <button class="icon-btn nav-close" popovertarget="menu" popovertargetaction="hide" aria-label="{get('nav.close', lang)}">{icon("x")}</button>
@@ -242,7 +242,7 @@ def footer(lang):
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div>
-      <img class="foot-logo" src="/assets/img/logo.png" alt="{escape(S['name'])}" width="120" height="109" loading="lazy">
+      <img class="foot-logo" src="/assets/img/logo-mark.png" alt="{escape(S['name'])}" width="120" height="120" loading="lazy">
       <p class="muted">{get("footer.tagline", lang)}</p>
       {social(lang)}
     </div>
