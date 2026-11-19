@@ -15,6 +15,7 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">"
 document.addEventListener("DOMContentLoaded", () => {
   header();
   menu();
+  footAccordion();
   heroLayout();
   rails();
   contactForm();
@@ -32,6 +33,16 @@ function menu() {
   if (!nav) return;
   // anchor links inside the full-screen menu should close it
   nav.addEventListener("click", (e) => { if (e.target.closest("a") && nav.matches(":popover-open")) nav.hidePopover(); });
+}
+
+// footer links: a collapsed accordion on phones, always open on wider screens
+function footAccordion() {
+  const acc = $(".foot-acc");
+  if (!acc) return;
+  const mq = matchMedia("(max-width: 600px)");
+  const set = () => { acc.open = !mq.matches; };
+  set();
+  mq.addEventListener("change", set);
 }
 
 // preview switch for the client: ?hero=boxed | ?hero=full (default comes from copy.json site.hero_layout)

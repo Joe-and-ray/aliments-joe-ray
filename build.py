@@ -132,6 +132,8 @@ def icon(name, cls="i"):
 
 
 SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+<symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
 <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></symbol>
@@ -191,8 +193,10 @@ def head(lang, page, title, desc, extra=""):
 
 def header(lang, page):
     home = PATHS["home"][lang]
-    links = [("about", "#about"), ("products", "#products"), ("services", "#services"), ("testimonials", "#testimonials"), ("faq", "#faq")]
-    nav = "".join(f'<li><a href="{home}{h}">{get("nav." + k, lang)}</a></li>' for k, h in links)
+    links = [("about", home + "#about"), ("products", home + "#products"), ("services", home + "#services"),
+             ("catalogue", PATHS["catalogue"][lang]), ("testimonials", home + "#testimonials"), ("faq", home + "#faq")]
+    cur = lambda k: ' aria-current="page"' if k == page else ""
+    nav = "".join(f'<li><a href="{h}"{cur(k)}>{get("nav." + k, lang)}</a></li>' for k, h in links)
     # one link to the other language, after the Contact button
     other = "fr" if lang == "en" else "en"
     lang_link = (f'<a class="lang" href="{PATHS[page][other]}" hreflang="{other}" lang="{other}" '
@@ -240,11 +244,12 @@ def footer(lang):
     <div>
       <img class="foot-logo" src="/assets/img/logo.png" alt="{escape(S['name'])}" width="120" height="109" loading="lazy">
       <p class="muted">{get("footer.tagline", lang)}</p>
+      {social(lang)}
     </div>
-    <div>
-      <h2 class="foot-h">{get("footer.explore", lang)}</h2>
+    <details class="foot-acc" open>
+      <summary><h2 class="foot-h">{get("footer.explore", lang)}</h2>{icon("plus", "i foot-acc-icon")}</summary>
       <ul class="foot-links">{nav}</ul>
-    </div>
+    </details>
     <div>
       <h2 class="foot-h">{get("footer.reach", lang)}</h2>
       {contact_lines(lang)}
@@ -258,6 +263,12 @@ def footer(lang):
 </body>
 </html>
 """
+
+
+def social(lang):
+    links = "".join(f'<li><a href="{escape(x["url"])}" target="_blank" rel="noopener" aria-label="{escape(x["name"])}">{icon(x["icon"])}</a></li>'
+                    for x in S["social"])
+    return f'<ul class="social" aria-label="{get("nav.follow", lang)}">{links}</ul>'
 
 
 def contact_lines(lang):
@@ -299,10 +310,10 @@ def home(lang):
 
     services = "".join(f"""
       <li class="service">
-        {icon(s["icon"], "i service-icon")}
+        <span class="service-top">{icon(s["icon"], "i service-icon")}<span class="service-num" aria-hidden="true">0{n}</span></span>
         <h3>{tr(s["title"], lang)}</h3>
         <p>{tr(s["body"], lang)}</p>
-      </li>""" for s in C["services"]["items"])
+      </li>""" for n, s in enumerate(C["services"]["items"], 1))
 
     about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["paragraphs"])
     # the default layout's hero photo loads first; the other one only when previewed (?hero=)
@@ -315,7 +326,7 @@ def home(lang):
     # second copy makes the marquee loop seamlessly; hidden from AT and tab order
     logos = "".join(logo(b, False) for b in C["brands"]["items"]) + "".join(logo(b, True) for b in C["brands"]["items"])
 
-    # mosaic: every featured product at once; tile size comes from its position (see .mosaic in site.css)
+    # product grid: every featured product at once, whole photo visible
     ask = get("products.ask", lang)
     prods = "".join(f"""
       <li class="tile">
@@ -338,7 +349,7 @@ def home(lang):
     reviews = "".join(f"""
       <li class="review"{' data-source="google"' if g else ''}>
         <blockquote><p>{text}</p></blockquote>
-        <p class="who"><strong>{escape(who)}</strong>{('<span>' + sub + '</span>') if sub else ''}{GOOGLE_G if g else ''}</p>
+        <p class="who"><strong>{escape(who)}</strong>{GOOGLE_G if g else ''}<span class="stars" style="--r:5" role="img" aria-label="{get('nav.five_stars', lang)}"></span>{('<span class="who-sub">' + sub + '</span>') if sub else ''}</p>
       </li>""" for who, text, sub, g in cards)
 
     points = "".join(f"<li>{icon('check')}<span>{tr(p, lang)}</span></li>" for p in C["wholesale"]["points"])
@@ -373,9 +384,8 @@ def home(lang):
   </div>
 </section>
 
-<section class="brands" aria-labelledby="brands-h">
+<section class="brands" aria-label="{get("brands.title", lang)}">
   <div class="wrap brands-head">
-    <h2 id="brands-h">{get("brands.title", lang)}</h2>
     <p>{get("brands.lead", lang)}</p>
   </div>
   <div class="logo-rail"><ul class="logo-track">{logos}</ul></div>
@@ -383,7 +393,10 @@ def home(lang):
 
 <section class="section about" id="about">
   <div class="wrap about-grid">
-    <figure class="about-media"><img src="/assets/img/history.jpg" alt="{get('about.image_alt', lang)}" loading="lazy" width="1019" height="1100"></figure>
+    <div class="about-media">
+      <figure><img src="/assets/img/history-1.jpg" alt="{tr(C['about']['image_alts'][0], lang)}" loading="lazy" width="469" height="435"></figure>
+      <figure><img src="/assets/img/history-2.jpg" alt="{tr(C['about']['image_alts'][1], lang)}" loading="lazy" width="506" height="450"></figure>
+    </div>
     <div class="about-copy">
       <p class="eyebrow">{get("about.eyebrow", lang)}</p>
       <h2>{about_title}</h2>
@@ -416,7 +429,7 @@ def home(lang):
       </div>
       <a class="btn btn-ghost" href="{cat}">{get("products.all", lang)} {icon("arrow")}</a>
     </header>
-    <ul class="mosaic">{prods}</ul>
+    <ul class="product-grid">{prods}</ul>
   </div>
 </section>
 
@@ -509,6 +522,7 @@ def home(lang):
         <h2>{get("contact.title", lang)}</h2>
         <p class="lead">{get("contact.lead", lang)}</p>
         {contact_lines(lang)}
+        {social(lang)}
       </div>
       <form class="form" data-state="idle" data-endpoint="{endpoint}" method="post" action="{endpoint or '#'}"
             data-item-prefix="{get('contact.item_prefix', lang)}">

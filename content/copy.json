@@ -14,6 +14,11 @@
     "url": "https://alimentsjoeandray.com",
     "hero_layout": "full",
     "_hero_layout_note": "full = full-width photo behind the headline; boxed = text left, photo in a rounded box right. Preview the other one with ?hero=boxed or ?hero=full.",
+    "social": [
+      { "name": "Facebook", "icon": "facebook", "url": "https://alimentsjoeandray.com/#" },
+      { "name": "Instagram", "icon": "instagram", "url": "https://alimentsjoeandray.com/#" }
+    ],
+    "_social_todo": "Both links are the placeholders from the client's current site. Replace with the real Facebook and Instagram page URLs.",
     "form_endpoint": "https://formspree.io/f/YOUR_FORM_ID",
     "_form_endpoint_todo": "PLACEHOLDER. Replace YOUR_FORM_ID with the real Formspree form ID before launch. While the placeholder is here, the form only simulates a successful send (nothing is delivered)."
   },
@@ -50,6 +55,8 @@
     "menu": { "en": "Menu", "fr": "Menu" },
     "close": { "en": "Close", "fr": "Fermer" },
     "skip": { "en": "Skip to content", "fr": "Passer au contenu" },
+    "follow": { "en": "Follow us", "fr": "Suivez-nous" },
+    "five_stars": { "en": "5 out of 5 stars", "fr": "5 étoiles sur 5" },
     "switch_lang": { "en": "Français", "fr": "English" }
   },
 
@@ -158,10 +165,10 @@
   "about": {
     "eyebrow": { "en": "About us", "fr": "À propos" },
     "title": { "en": "Three generations. It started with pepperoni.", "fr": "Trois générations. Tout a commencé avec du pepperoni." },
-    "image_alt": {
-      "en": "Archive photos of the original Joe & Ray delivery vans, next to today’s warehouse team",
-      "fr": "Photos d’archives des premières camionnettes Joe & Ray, à côté de l’équipe d’entrepôt d’aujourd’hui"
-    },
+    "image_alts": [
+      { "en": "Archive photo: a man in a white coat beside an early Joe & Ray delivery van", "fr": "Photo d’archives : un homme en sarrau blanc près d’une des premières camionnettes Joe & Ray" },
+      { "en": "Archive photo: a Joe & Ray delivery van lettered with pepperoni and salami", "fr": "Photo d’archives : une camionnette Joe & Ray lettrée « pepperoni, salami »" }
+    ],
     "paragraphs": [
       {
         "en": "In 1954, Giuseppe “Joe” and Raymond “Ray” Teolis began delivering fresh pepperoni to neighbourhood pizzerias. Those early customers helped shape the business that became Les Aliments Joe & Ray.",
@@ -346,8 +353,8 @@
     "eyebrow": { "en": "Contact", "fr": "Contact" },
     "title": { "en": "Get in touch", "fr": "Contactez-nous" },
     "lead": {
-      "en": "Interested in learning more about our services or placing an order? Contact us today.",
-      "fr": "Vous voulez en savoir plus sur nos services ou passer une commande? Contactez-nous dès aujourd’hui."
+      "en": "Looking for a product, opening an account or ready to place an order? Call us or send a message and our team will help.",
+      "fr": "Vous cherchez un produit, voulez ouvrir un compte ou passer une commande? Appelez-nous ou écrivez-nous, notre équipe vous aidera."
     },
     "directions": { "en": "Directions", "fr": "Itinéraire" },
     "fax": { "en": "Fax", "fr": "Téléc." },
