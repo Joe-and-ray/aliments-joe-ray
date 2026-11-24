@@ -15,10 +15,9 @@
     "hero_layout": "full",
     "_hero_layout_note": "full = full-width photo behind the headline; boxed = text left, photo in a rounded box right. Preview the other one with ?hero=boxed or ?hero=full.",
     "social": [
-      { "name": "Facebook", "icon": "facebook", "url": "https://alimentsjoeandray.com/#" },
-      { "name": "Instagram", "icon": "instagram", "url": "https://alimentsjoeandray.com/#" }
+      { "name": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/alimentsjoeandray" },
+      { "name": "Instagram", "icon": "instagram", "url": "https://www.instagram.com/alimjoeandray/" }
     ],
-    "_social_todo": "Both links are the placeholders from the client's current site. Replace with the real Facebook and Instagram page URLs.",
     "form_endpoint": "https://formspree.io/f/YOUR_FORM_ID",
     "_form_endpoint_todo": "PLACEHOLDER. Replace YOUR_FORM_ID with the real Formspree form ID before launch. While the placeholder is here, the form only simulates a successful send (nothing is delivered)."
   },
