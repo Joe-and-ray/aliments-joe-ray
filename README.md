@@ -19,7 +19,7 @@ python3 -m http.server 4321      # preview at http://localhost:4321
 | Behaviour                           | `assets/js/site.js`                    |
 | Page structure / sections           | `build.py` (`home()`, `catalogue()`)   |
 
-**Never edit** `index.html`, `fr/`, `product-catalogue/`, `sitemap.xml` or `robots.txt`: they are generated. Run `python3 build.py` after any change.
+**Never edit** `index.html`, `fr/`, `product-catalogue/`, `404.html`, `sitemap.xml`, `robots.txt` or `_site/`: they are generated. Run `python3 build.py` after any change.
 
 ## Updating the catalogue
 
@@ -63,17 +63,24 @@ Photos `hero-full.webp` (hero) and `wholesale-chef.jpg` (wholesale) were supplie
 
 The form posts to [Web3Forms](https://web3forms.com) (`site.form_endpoint` and `site.form_access_key` in `copy.json`). Messages are emailed to the address registered with that access key; the subject line is `contact.email_subject`. The key is public by design. A hidden `botcheck` box catches spam bots. Without JavaScript the form still posts straight to Web3Forms.
 
-## Client preview (GitHub Pages)
+## Deploying (Cloudflare Pages)
 
-Every push to `main` rebuilds and deploys the preview via `.github/workflows/pages.yml`.
-Pages serves it under `/<repo-name>/`, so the workflow builds with `SITE_BASE=/<repo-name>` (which also adds `noindex`).
-Locally, `python3 build.py` (no `SITE_BASE`) builds for the domain root as usual.
+`python3 build.py` writes `_site/`: exactly the folder that goes online (pages, assets, `404.html`, `sitemap.xml`, `robots.txt`, `_headers` with security headers, `_redirects` for the old WordPress URLs). Sources, notes and the build script stay private.
 
-## Deploying to alimentsjoeandray.com
+One-time setup in Cloudflare (Workers & Pages → Create → Pages → Connect to Git):
 
-1. `python3 build.py` (no `SITE_BASE`): pages are built for the domain root, indexable, with canonical and hreflang URLs on `https://alimentsjoeandray.com` (`site.url` in `copy.json`).
-2. Upload these to the web root: `index.html`, `fr/`, `product-catalogue/`, `assets/`, `sitemap.xml`, `robots.txt`. Nothing else is needed (no server code, no database).
-3. `/product-catalogue/` keeps the old site's URL, so existing links keep working.
-4. After launch: send one real test message through the form, submit `sitemap.xml` in Google Search Console, and in Web3Forms optionally restrict the key to the `alimentsjoeandray.com` domain.
+| Setting | Value |
+|---|---|
+| Repository | the client's GitHub repository |
+| Production branch | `main` → https://alimentsjoeandray.com |
+| Build command | `python3 build.py` |
+| Build output directory | `_site` |
+| Preview branches | `staging` only (sandbox: `https://staging.<project>.pages.dev`) |
 
-The GitHub Pages copy is a preview only: it is built with `SITE_BASE=/<repo-name>`, which adds `noindex` and a `robots.txt` that blocks crawlers.
+Then: add the custom domains `alimentsjoeandray.com` and `www.alimentsjoeandray.com` (redirect `www` to the apex with a Cloudflare redirect rule), turn on Web Analytics for the project, verify the domain in Google Search Console (DNS record in Cloudflare) and submit `https://alimentsjoeandray.com/sitemap.xml`. Optionally restrict the Web3Forms key to the domain. Write the real sandbox URL into `AGENTS.md` section 3.
+
+Day-to-day changes follow `AGENTS.md`: edit on `staging` → check the sandbox → merge to `main` only when the owner says "push it live".
+
+The old WordPress site had only `/` and `/product-catalogue/` (both kept); its leftover `/hello-world/` and `/category/…` URLs redirect to the home page.
+
+`.github/workflows/pages.yml` is the design agency's GitHub Pages preview (built with `SITE_BASE=/<repo-name>`, `noindex`). It only runs in the agency repository.

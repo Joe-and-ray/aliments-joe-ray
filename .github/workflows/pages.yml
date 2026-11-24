@@ -16,6 +16,8 @@ concurrency:
 
 jobs:
   deploy:
+    # agency preview only: does nothing once the site lives in the client's own repository (Cloudflare deploys it there)
+    if: github.repository == 'featureJosh/aliments-joe-ray'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -25,9 +27,8 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      # Pages serves this repo under /<repo-name>/, so build with that base (also adds noindex)
+      # Pages serves this repo under /<repo-name>/, so build with that base (also adds noindex). build.py writes _site/.
       - run: SITE_BASE="/${{ github.event.repository.name }}" python3 build.py
-      - run: mkdir _site && cp -r index.html fr product-catalogue assets sitemap.xml robots.txt _site/ && touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build the Les Aliments Joe & Ray site.
 
-    python3 build.py          # writes index.html, fr/index.html, product-catalogue/…, sitemap.xml
+    python3 build.py          # writes index.html, fr/, product-catalogue/, 404.html, sitemap.xml, robots.txt
+                              # and _site/: the exact folder to deploy (Cloudflare build output directory)
 
 Sources (edit these, never the generated HTML):
     content/copy.json       every word on the site, side by side {"en": …, "fr": …}
     content/catalogue.csv   one product per row: category,name,code,image
 Python stdlib only. See README.md.
 """
-import csv, hashlib, json, os, re, unicodedata
+import csv, hashlib, json, os, re, shutil, unicodedata
 from html import escape
 from pathlib import Path
 from urllib.parse import quote
@@ -450,7 +451,7 @@ def home(lang):
 <section class="section" id="wholesale">
   <div class="wrap">
     <div class="wholesale">
-      <figure class="wholesale-media"><img src="/assets/img/wholesale-chef.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="2000" height="1331"></figure>
+      <figure class="wholesale-media"><img src="/assets/img/wholesale-chef.jpg" alt="{get('wholesale.image_alt', lang)}" loading="lazy" width="1400" height="931"></figure>
       <div class="wholesale-copy">
         <p class="eyebrow">{get("wholesale.eyebrow", lang)}</p>
         <h2>{get("wholesale.title", lang)}</h2>
@@ -609,6 +610,50 @@ def catalogue(lang):
             + header(lang, "catalogue") + body + footer(lang))
 
 
+def not_found():
+    """One bilingual 404 page (hosts serve /404.html for any unknown URL). Not indexed."""
+    t = lambda k: f'{get("not_found." + k, "en")} · <span lang="fr">{get("not_found." + k, "fr")}</span>'
+    h = head("en", "home", f'{get("not_found.title", "en")} | {escape(S["name"])}', get("not_found.body", "en"))
+    h = re.sub(r'<link rel="(canonical|alternate)"[^>]*>\n', "", h)
+    h = h.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1)
+    body = f"""
+<section class="section not-found">
+  <div class="wrap">
+    <p class="eyebrow">404</p>
+    <h1>{t("title")}</h1>
+    <p class="lead">{t("body")}</p>
+    <div class="row">
+      <a class="btn btn-primary" href="{PATHS['home']['en']}">{get("not_found.home", "en")} {icon("arrow")}</a>
+      <a class="btn btn-ghost" href="{PATHS['home']['fr']}" lang="fr">{get("not_found.home", "fr")}</a>
+      <a class="btn btn-ghost" href="{PATHS['catalogue']['en']}">{get("not_found.catalogue", "en")}</a>
+    </div>
+  </div>
+</section>"""
+    return h + header("en", "home") + body + footer("en")
+
+
+# Cloudflare Pages / Workers read these two files from the deploy folder.
+HEADERS = """/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+/assets/*
+  Cache-Control: public, max-age=86400
+"""
+# old WordPress URLs that are not part of the new site -> home page (keeps any links and search results working)
+REDIRECTS = """/hello-world/ / 301
+/hello-world / 301
+/category/* / 301
+/feed/ / 301
+/feed / 301
+/home/ / 301
+/accueil/ /fr/ 301
+"""
+DEPLOY = ["index.html", "fr", "product-catalogue", "assets", "404.html", "sitemap.xml", "robots.txt"]
+
+
 def main():
     out = []
     for lang in LANGS:
@@ -622,6 +667,21 @@ def main():
     # previews (SITE_BASE set) stay out of search engines; the real domain allows everything
     robots = "User-agent: *\nDisallow: /\n" if BASE else f"User-agent: *\nAllow: /\n\nSitemap: {S['url']}/sitemap.xml\n"
     (ROOT / "robots.txt").write_text(robots)
+    (ROOT / "404.html").write_text(rebase(not_found()), encoding="utf-8")
+
+    # _site/: exactly what goes online (no build script, sources or notes)
+    site = ROOT / "_site"
+    shutil.rmtree(site, ignore_errors=True)
+    site.mkdir()
+    for name in DEPLOY:
+        src = ROOT / name
+        if src.is_dir():
+            shutil.copytree(src, site / name, ignore=shutil.ignore_patterns(".DS_Store"))
+        else:
+            shutil.copy2(src, site / name)
+    (site / "_headers").write_text(HEADERS)
+    (site / "_redirects").write_text(REDIRECTS)
+    (site / ".nojekyll").write_text("")
     print(f"built {len(out)} pages · {COUNT} products in {len(CAT)} categories")
 
 

@@ -331,6 +331,11 @@ details[open] .faq-icon { transform: rotate(45deg); background: var(--ink); bord
 .social a:hover { background: #fff; border-color: #fff; color: var(--green-800); }
 .social .i { width: 19px; height: 19px; }
 
+/* 404 */
+.not-found { min-height: 50vh; }
+.not-found h1 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.not-found .row { flex-wrap: wrap; }
+
 /* footer */
 .site-footer { background: var(--green-800); color: rgb(255 255 255 / .8); padding: 72px 0 28px; font-size: .95rem; }
 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; }

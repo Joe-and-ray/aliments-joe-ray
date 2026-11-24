@@ -58,6 +58,13 @@
     "switch_lang": { "en": "Français", "fr": "English" }
   },
 
+  "not_found": {
+    "title": { "en": "Page not found", "fr": "Page introuvable" },
+    "body": { "en": "This page doesn’t exist or has moved.", "fr": "Cette page n’existe pas ou a été déplacée." },
+    "home": { "en": "Back to the home page", "fr": "Retour à l’accueil" },
+    "catalogue": { "en": "Browse the catalogue", "fr": "Consulter le catalogue" }
+  },
+
   "announce": {
     "link": { "en": "Coming soon: Acqua eVa, exclusive in Canada", "fr": "Bientôt : Acqua eVa, en exclusivité au Canada" }
   },
