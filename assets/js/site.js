@@ -223,7 +223,7 @@ function catalogue() {
   root.addEventListener("click", async (e) => {
     const btn = e.target.closest(".code");
     if (!btn) return;
-    try { await navigator.clipboard.writeText(btn.dataset.copy); } catch { return; }
+    if (!(await copyText(btn.dataset.copy))) return;
     btn.dataset.state = "copied";
     clearTimeout(btn._t);
     btn._t = setTimeout(() => (btn.dataset.state = "idle"), 1600);
@@ -231,4 +231,17 @@ function catalogue() {
 
   render();
   if (startCat) showChip();
+}
+
+// clipboard API first; some browsers or embedded views refuse it, so fall back to a hidden textarea
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch {}
+  const ta = Object.assign(document.createElement("textarea"), { value: text, readOnly: true });
+  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+  document.body.append(ta);
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch {}
+  ta.remove();
+  return ok;
 }
