@@ -148,6 +148,19 @@ html[data-scrolled] .brand { --logo: 70px; margin-top: 5px; padding: 3px; box-sh
 .hero .btn-ghost { border-color: rgb(255 255 255 / .45); color: #fff; }
 .hero .btn-ghost:hover { border-color: #fff; }
 
+/* ---------- brands: right under the hero ---------- */
+.brands { padding: clamp(40px, 5vw, 64px) 0 0; }
+.brands-head { text-align: center; margin-bottom: 20px; }
+.brands-head p { color: var(--muted); font-size: .95rem; }
+.logo-rail { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-track { display: flex; align-items: center; width: max-content; gap: 48px; animation: marquee 60s linear infinite; }
+.logo-track a { display: grid; place-items: center; width: 140px; height: 80px; }
+.logo-track img { max-height: 64px; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: grayscale(1); opacity: .75; transition: filter .2s, opacity .2s; }
+.logo-track a:hover img, .logo-track a:focus-visible img { filter: none; opacity: 1; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .logo-track { flex-wrap: wrap; justify-content: center; width: auto; padding-inline: var(--gutter); } .logo-track li[aria-hidden] { display: none; } }
+
+/* ---------- sections ---------- */
 .section { padding: clamp(72px, 9vw, 120px) 0; }
 .section-head { max-width: 760px; margin-bottom: clamp(32px, 4vw, 48px); }
 .section-head.split { max-width: none; display: flex; align-items: end; justify-content: space-between; gap: 24px; }
@@ -394,7 +407,7 @@ mark { background: #fbe7a1; color: inherit; border-radius: 3px; padding: 0 1px; 
   .about-grid, .faq-grid, .contact, .eva, .wholesale { grid-template-columns: 1fr; }
   .brand { --logo: 88px; margin-top: 4px; padding: 4px; }
   html[data-scrolled] .brand { --logo: 60px; margin-top: 4px; padding: 3px; }
-        .product-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
   .tile-ask { display: none; }
   .wholesale-media img { aspect-ratio: 16 / 10; }
   .eva-media img { aspect-ratio: 1; height: auto; object-position: 50% 30%; }
