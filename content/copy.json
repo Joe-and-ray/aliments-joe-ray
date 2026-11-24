@@ -12,14 +12,13 @@
     "fax": "514.376.9167",
     "map_url": "https://www.google.com/maps/search/?api=1&query=6506+Rue+P.E.+Lamarche+Saint-L%C3%A9onard+QC+H1P+1J4",
     "url": "https://alimentsjoeandray.com",
-    "hero_layout": "full",
-    "_hero_layout_note": "full = full-width photo behind the headline; boxed = text left, photo in a rounded box right. Preview the other one with ?hero=boxed or ?hero=full.",
     "social": [
       { "name": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/alimentsjoeandray" },
       { "name": "Instagram", "icon": "instagram", "url": "https://www.instagram.com/alimjoeandray/" }
     ],
-    "form_endpoint": "https://formspree.io/f/YOUR_FORM_ID",
-    "_form_endpoint_todo": "PLACEHOLDER. Replace YOUR_FORM_ID with the real Formspree form ID before launch. While the placeholder is here, the form only simulates a successful send (nothing is delivered)."
+    "form_endpoint": "https://api.web3forms.com/submit",
+    "form_access_key": "a0b1bf71-ea83-4c3b-9a6c-3a203b91f599",
+    "_form_note": "Web3Forms. The access key is meant to be public (it only lets this form send to the inbox set up in Web3Forms). Messages go to the email address registered with that key."
   },
 
   "meta": {
@@ -71,8 +70,7 @@
       "fr": "Des produits alimentaires de qualité livrés aux restaurants et pizzerias partout au Québec et au-delà."
     },
     "cta_catalogue": { "en": "Browse product catalogue", "fr": "Consulter le catalogue" },
-    "image_alt": { "en": "Two chefs plating burrata, tomatoes and pasta at a stainless steel kitchen counter", "fr": "Deux chefs dressent de la burrata, des tomates et des pâtes sur un comptoir en inox" },
-    "image_alt_boxed": { "en": "Two warehouse staff reviewing an order on a clipboard beside pallets and shelves of food products", "fr": "Deux employés d’entrepôt révisent une commande sur une planchette, près de palettes et d’étagères de produits alimentaires" }
+    "image_alt": { "en": "Two chefs plating burrata, tomatoes and pasta at a stainless steel kitchen counter", "fr": "Deux chefs dressent de la burrata, des tomates et des pâtes sur un comptoir en inox" }
   },
 
   "trust": {
@@ -365,6 +363,7 @@
     "message": { "en": "What do you need?", "fr": "De quoi avez-vous besoin?" },
     "item_prefix": { "en": "I'd like pricing for", "fr": "J’aimerais un prix pour" },
     "send": { "en": "Send message", "fr": "Envoyer" },
+    "email_subject": { "en": "New message from the Joe & Ray website", "fr": "Nouveau message du site Joe & Ray" },
     "sending": { "en": "Sending…", "fr": "Envoi…" },
     "sent_title": { "en": "Message sent.", "fr": "Message envoyé." },
     "sent_body": { "en": "Thanks. Our team will get back to you shortly.", "fr": "Merci. Notre équipe vous répondra sous peu." },

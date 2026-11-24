@@ -301,11 +301,10 @@ def home(lang):
     home_path = PATHS["home"][lang]
     R = C["reviews"]
 
-    # stats: full row under About (boxed version); three of them in the hero (full version)
+    # stats shown at the bottom of the hero, in the order set by trust.hero_order
     industries = len(C["wholesale"]["who"]["en"].split("|"))
     stat = lambda t: f'<li><strong>{tr(t["value"], lang, industries=industries)}</strong><span>{tr(t["label"], lang)}</span></li>'
     stats = {t["key"]: t for t in C["trust"]["items"]}
-    trust = "".join(stat(t) for t in C["trust"]["items"])
     hero_stats = "".join(stat(stats[k]) for k in C["trust"]["hero_order"])
 
     services = "".join(f"""
@@ -316,8 +315,6 @@ def home(lang):
       </li>""" for s in C["services"]["items"])
 
     about = "".join(f"<p>{tr(p, lang)}</p>" for p in C["about"]["paragraphs"])
-    # the default layout's hero photo loads first; the other one only when previewed (?hero=)
-    load = lambda layout: 'fetchpriority="high"' if S.get("hero_layout", "full") == layout else 'loading="lazy"'
     # one line per sentence: "Three generations." / "It started with pepperoni."
     about_title = "".join(f"<span>{x}</span>" for x in re.split(r"(?<=\.) ", get("about.title", lang)))
 
@@ -366,7 +363,7 @@ def home(lang):
     ws_prefill = quote(C["wholesale"]["prefill"][lang])
 
     body = f"""
-<section class="hero" data-hero="{escape(S.get('hero_layout', 'full'))}">
+<section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <p class="eyebrow">{get("hero.eyebrow", lang)}</p>
@@ -378,8 +375,7 @@ def home(lang):
       <ul class="hero-stats" aria-label="{get('trust.label', lang)}">{hero_stats}</ul>
     </div>
     <figure class="hero-media">
-      <img class="hero-img-full" src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" {load("full")}>
-      <img class="hero-img-boxed" src="/assets/img/hero-boxed.webp" alt="{get('hero.image_alt_boxed', lang)}" width="1672" height="941" {load("boxed")}>
+      <img src="/assets/img/hero-full.webp" alt="{get('hero.image_alt', lang)}" width="1774" height="887" fetchpriority="high">
     </figure>
   </div>
 </section>
@@ -402,9 +398,6 @@ def home(lang):
   </div>
 </section>
 
-<section class="trust" aria-label="{get('trust.label', lang)}">
-  <div class="wrap"><ul class="trust-list">{trust}</ul></div>
-</section>
 
 <section class="section" id="services">
   <div class="wrap">
@@ -530,6 +523,10 @@ def home(lang):
           <label><span>{get("contact.phone", lang)}</span><input name="phone" type="tel" autocomplete="tel"></label>
           <label class="full"><span>{get("contact.message", lang)}</span><textarea name="message" rows="4" required></textarea></label>
           <input type="hidden" name="language" value="{lang}">
+          <input type="hidden" name="access_key" value="{escape(S['form_access_key'])}">
+          <input type="hidden" name="subject" value="{get('contact.email_subject', lang)}">
+          <input type="hidden" name="from_name" value="{escape(S['name'])}">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-light full" type="submit">
             <span class="when-idle">{get("contact.send", lang)} {icon("send")}</span>
             <span class="when-sending">{get("contact.sending", lang)}</span>
@@ -622,6 +619,9 @@ def main():
             out.append(PATHS[page][lang])
     urls = "".join(f"<url><loc>{S['url']}{u}</loc></url>" for u in out)
     (ROOT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
+    # previews (SITE_BASE set) stay out of search engines; the real domain allows everything
+    robots = "User-agent: *\nDisallow: /\n" if BASE else f"User-agent: *\nAllow: /\n\nSitemap: {S['url']}/sitemap.xml\n"
+    (ROOT / "robots.txt").write_text(robots)
     print(f"built {len(out)} pages · {COUNT} products in {len(CAT)} categories")
 
 

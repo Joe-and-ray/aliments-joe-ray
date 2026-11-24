@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
       # Pages serves this repo under /<repo-name>/, so build with that base (also adds noindex)
       - run: SITE_BASE="/${{ github.event.repository.name }}" python3 build.py
-      - run: mkdir _site && cp -r index.html fr product-catalogue assets sitemap.xml _site/ && touch _site/.nojekyll
+      - run: mkdir _site && cp -r index.html fr product-catalogue assets sitemap.xml robots.txt _site/ && touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5
       - id: deployment
         uses: actions/deploy-pages@v5

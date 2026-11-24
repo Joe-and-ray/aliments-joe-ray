@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   header();
   menu();
   footAccordion();
-  heroLayout();
   rails();
   contactForm();
   catalogue();
@@ -43,32 +42,6 @@ function footAccordion() {
   const set = () => { acc.open = !mq.matches; };
   set();
   mq.addEventListener("change", set);
-}
-
-// preview switch for the client: ?hero=boxed | ?hero=full (default comes from copy.json site.hero_layout)
-// The choice sticks for the tab: it is remembered, and added to every internal link on click,
-// so menu anchors, the language link and the catalogue keep showing the same version.
-function heroChoice() {
-  const ok = (h) => (h === "full" || h === "boxed" ? h : null);
-  const fromUrl = ok(new URLSearchParams(location.search).get("hero"));
-  try {
-    if (fromUrl) sessionStorage.setItem("hero", fromUrl);
-    return fromUrl || ok(sessionStorage.getItem("hero"));
-  } catch { return fromUrl; }
-}
-
-function heroLayout() {
-  const h = heroChoice();
-  if (!h) return;
-  $(".hero")?.setAttribute("data-hero", h);
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("a[href]");
-    if (!a || a.origin !== location.origin || /\.(?!html?$)\w+$/.test(a.pathname)) return;
-    const u = new URL(a.href);
-    if (u.searchParams.get("hero") === h) return;
-    u.searchParams.set("hero", h);
-    a.href = u.href;
-  }, true);
 }
 
 // prev/next buttons for any scroll-snap rail: [data-rail-ctrl="<rail id>"]; one card per click
@@ -105,16 +78,10 @@ function contactForm() {
     try {
       const endpoint = form.dataset.endpoint;
       if (!endpoint) throw new Error("No form endpoint configured (content/copy.json site.form_endpoint)");
-      // TODO(launch): real Formspree ID needed. Placeholder endpoint = prototype mode: fake success, nothing is sent.
-      if (endpoint.includes("YOUR_FORM_ID")) {
-        console.warn("[contact form] Placeholder endpoint: simulated send, message NOT delivered. Set site.form_endpoint in content/copy.json.");
-        await new Promise((r) => setTimeout(r, 700));
-        form.dataset.state = "sent";
-        form.reset();
-        return;
-      }
+      // Web3Forms answers JSON { success, message }; anything else counts as a failure
       const res = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) throw new Error(data.message || "HTTP " + res.status);
       form.dataset.state = "sent";
       form.reset();
     } catch (err) {
@@ -187,8 +154,6 @@ function catalogue() {
     const p = new URLSearchParams();
     if (q) p.set("q", q);
     if (cat) p.set("cat", cat);
-    const hero = heroChoice();
-    if (hero) p.set("hero", hero);
     history.replaceState(null, "", p.toString() ? "?" + p : location.pathname);
   }
 
