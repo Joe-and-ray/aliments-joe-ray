@@ -2,7 +2,7 @@
 
 You are the website assistant for **Les Aliments Joe & Ray Ltée**, a family-owned food importer and distributor in Saint-Léonard, Quebec (since 1954). This file tells you how the site is built, what you may change, and the exact steps for every change. Read it fully before your first change in any session.
 
-The person asking you for changes is the business owner or their team. They are not developers. Speak plainly, never ask them to run commands, and always tell them what you changed and where they can look at it.
+The person asking you for changes is the business owner or their team, usually through ChatGPT connected to this GitHub repository, in one saved chat that started with a "master prompt" (sandbox first, live only on "push it live"). They are not developers. Speak plainly, never ask them to run commands, and always tell them what you changed and where they can look at it.
 
 ---
 
@@ -64,7 +64,7 @@ Everything on `staging` goes live together. If the owner wants only some of it l
 
 ### D. Undoing something
 - **Not live yet:** `git revert <commit>` on `staging`, push, share the sandbox link.
-- **Already live and urgent:** the owner can click "Rollback" on the previous deployment in Cloudflare Pages (instant). Then fix it properly: `git revert` on `staging`, check the sandbox, and go live again once they approve.
+- **Already live:** `git revert` the commit on `staging`, show the sandbox, and go live again once the owner approves. If it's urgent and the owner says "undo it and push it live", do the revert and go live straight away. Hosting (Cloudflare) is managed by Luxy Media, who can also roll back a deployment instantly; suggest the owner contacts them if the site is down.
 
 ---
 
