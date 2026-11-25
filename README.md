@@ -77,7 +77,9 @@ One-time setup in Cloudflare (Workers & Pages → Create → Pages → Connect t
 | Build output directory | `_site` |
 | Preview branches | `staging` only (sandbox: `https://staging.<project>.pages.dev`) |
 
-Then: add the custom domains `alimentsjoeandray.com` and `www.alimentsjoeandray.com` (redirect `www` to the apex with a Cloudflare redirect rule), turn on Web Analytics for the project, verify the domain in Google Search Console (DNS record in Cloudflare) and submit `https://alimentsjoeandray.com/sitemap.xml`. Optionally restrict the Web3Forms key to the domain. Write the real sandbox URL into `AGENTS.md` section 3.
+Tracking carried over from the old WordPress site: Google Analytics 4 (`site.ga4_id`) and the Search Console verification tag (`site.google_site_verification`). Analytics loads only after cookie consent and only on `site.production_hosts`. Builds on any branch other than `main` (Cloudflare's `CF_PAGES_BRANCH`) are treated as previews: `noindex`, blocking `robots.txt`.
+
+Then: add the custom domains `alimentsjoeandray.com` and `www.alimentsjoeandray.com` (redirect `www` to the apex with a Cloudflare redirect rule), optionally turn on Cloudflare Web Analytics, confirm Search Console still shows the property as verified (the meta tag carries over) and submit `https://alimentsjoeandray.com/sitemap.xml`. Optionally restrict the Web3Forms key to the domain. Write the real sandbox URL into `AGENTS.md` section 3.
 
 Day-to-day changes follow `AGENTS.md`: edit on `staging` → check the sandbox → merge to `main` only when the owner says "push it live".
 

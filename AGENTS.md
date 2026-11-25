@@ -32,8 +32,8 @@ The person asking you for changes is the business owner or their team. They are 
 
 ## 3. The workflow, step by step
 
-**Sandbox link:** `https://staging.<cloudflare-project>.pages.dev`
-*(Setup note: replace `<cloudflare-project>` with the Cloudflare Pages project name once and commit. This alias always shows the latest `staging`. Cloudflare marks sandbox pages "noindex", so Google never lists them.)*
+**Sandbox link:** https://staging.aliments-joe-ray.pages.dev
+*(This alias always shows the latest `staging`. Sandbox builds add `noindex` and a blocking `robots.txt`, so Google never lists them, and Google Analytics never runs there.)*
 
 ### A. Making a change
 ```bash
@@ -123,12 +123,15 @@ Find the English text in `copy.json`, change `en` and `fr` together, build, chec
 
 **Acqua eVa arrives / changes** → `eva` (status, dates) and `announce`. When it's in stock, offer to move it from "Coming soon" into the featured products.
 
-**Replace a photo** → keep the same file name to avoid code changes. Match the old size and shape. Resize big photos: nothing over about 1,600px wide or 300 KB.
+**Replace a photo** → keep the same file name to avoid code changes. Match the old size and shape. Size guide: product photos 640×640 (~100 KB), section photos up to 1,400px wide (~180 KB), logos 280px wide (~8 KB).
 On macOS: `sips -Z 1400 -s format jpeg -s formatOptions 62 photo.jpg --out photo.jpg`
+The hero has two files: `hero-full.webp` (desktop) and `hero-mobile.jpg` (a 640×887 portrait crop for phones). Replace both together.
 
 **Videos** → don't add video files to the repository. Use a YouTube or Vimeo embed, or ask the owner where the video is hosted. Suggest placement and ask before adding a new section.
 
 **New section or bigger redesign** → describe the plan first (where, what, both languages), wait for a yes, then build it in `build.py` + `site.css`, following the existing patterns.
+
+**Tracking (Google Analytics + Search Console)** → `site.ga4_id` (GA4 `G-JQ5V6RXPCJ`, carried over from the old site) and `site.google_site_verification` (keeps Search Console ownership). Analytics loads **only after a visitor clicks Accept** on the cookie card (Quebec Law 25), and only on `site.production_hosts` (never on the sandbox or locally). Events sent: `page_view` (automatic), `generate_lead` (contact form sent), `click_to_call` (phone link tapped). The footer's "Cookie preferences" link reopens the card. Don't add other trackers (Meta pixel, Hotjar, etc.) without the owner's OK; each one must also wait for consent. Never test by clicking Accept on the live domain repeatedly: every test is a real visit in their reports.
 
 **Contact form** → sends via Web3Forms (`site.form_endpoint`, `site.form_access_key`). Messages go to the email registered with that key. To change the receiving email, the owner changes it in their Web3Forms account; no code change. Never remove the hidden `botcheck` field (spam protection).
 
@@ -150,7 +153,7 @@ On macOS: `sips -Z 1400 -s format jpeg -s formatOptions 62 photo.jpg --out photo
 
 1. `python3 build.py` runs without errors or warnings.
 2. `python3 -c "import json; json.load(open('content/copy.json'))"` (valid JSON).
-3. Open the changed page locally (`python3 -m http.server 4321`, then http://localhost:4321 and http://localhost:4321/fr/) and look at it **on desktop and on a phone-width window**. Check both languages.
+3. Open the changed page locally (`python3 -m http.server 4321`, then http://localhost:4321 and http://localhost:4321/fr/) and look at it **on desktop and at phone widths (360px and 390px)**. Check both languages. Nothing may scroll sideways.
 4. If you changed text: nothing overflows or wraps awkwardly on a phone, especially buttons, the top banner and headlines.
 5. If you changed links: click them.
 6. If you touched the form: don't send test messages yourself. They go to the owner's real inbox. Ask the owner to send one from the sandbox.
@@ -173,7 +176,7 @@ On macOS: `sips -Z 1400 -s format jpeg -s formatOptions 62 photo.jpg --out photo
 
 - Business: Les Aliments Joe & Ray Ltée, 6506 P.E. Lamarche, Saint-Léonard, QC H1P 1J4. Founded 1954 by Giuseppe "Joe" and Raymond "Ray" Teolis; third generation today.
 - Audience: restaurants, pizzerias, caterers, retailers in Quebec (B2B wholesale). CFIA-licensed importer, 2,000+ products.
-- Brand colours: green `#01563f`, red `#cf2a38`. Fonts: Archivo (headings), Figtree (text), from Google Fonts.
+- Brand colours: green `#01563f`, red `#cf2a38`. Fonts: Archivo (headings), Figtree (text), self-hosted in `assets/fonts/` (no Google Fonts requests; faster and nothing sent to Google). The `@font-face` rules are at the top of `site.css`.
 - Hosting: Cloudflare Pages (build command `python3 build.py`, output folder `_site`, production branch `main`). Domain DNS is managed in Cloudflare.
-- Form: Web3Forms. Analytics: Cloudflare Web Analytics, if enabled in the Cloudflare dashboard (no cookies, no code in the site).
+- Form: Web3Forms. Analytics: Google Analytics 4 behind the cookie card (see section 5). Cloudflare Web Analytics can also be switched on in the Cloudflare dashboard (cookieless, no code needed).
 - `.github/workflows/pages.yml` is the design agency's old preview. It does nothing in this repository; leave it alone.

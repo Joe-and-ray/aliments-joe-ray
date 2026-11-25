@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   header();
   menu();
   footAccordion();
+  consent();
   rails();
   contactForm();
   catalogue();
@@ -35,6 +36,12 @@ function menu() {
 }
 
 // footer links: a collapsed accordion on phones, always open on wider screens
+// phone clicks are a key conversion for a wholesaler: count them in GA4
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="tel:"]');
+  if (a) track("click_to_call", { number: a.getAttribute("href").slice(4) });
+});
+
 function footAccordion() {
   const acc = $(".foot-acc");
   if (!acc) return;
@@ -65,6 +72,53 @@ function rails() {
   }
 }
 
+// Google Analytics, only after the visitor accepts (Quebec Law 25), and only on the real domain:
+// the sandbox and local previews never send data. Choice kept in localStorage ("granted" | "denied").
+function consent() {
+  const box = $("#consent"), id = document.body.dataset.ga;
+  if (!box || !id) return;
+  const live = (document.body.dataset.gaHosts || "").split(" ").includes(location.hostname);
+  const KEY = "jr-consent";
+  const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+  const save = (v) => { try { localStorage.setItem(KEY, v); } catch {} };
+  const load = () => {
+    if (!live || window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag("js", new Date());
+    gtag("config", id);
+    document.head.append(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=" + id }));
+  };
+  const wipe = () => {
+    const base = location.hostname.replace(/^www\./, "");
+    document.cookie.split(";").map((c) => c.split("=")[0].trim()).filter((n) => n.startsWith("_ga"))
+      .forEach((n) => [`; domain=.${base}`, `; domain=${location.hostname}`, ""].forEach((d) => { document.cookie = `${n}=; Max-Age=0; path=/${d}`; }));
+  };
+  if (read() === "granted") load();
+  else if (read() === "denied") wipe(); // leftovers from an earlier "accept"
+  else box.hidden = false;
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-consent]");
+    if (!b) return;
+    const v = b.dataset.consent;
+    if (v === "open") { box.hidden = false; $("button", box).focus(); return; }
+    const was = read();
+    save(v);
+    box.hidden = true;
+    if (v === "granted") load();
+    else if (was === "granted") {
+      // withdrawing consent: stop Analytics first (so it can't rewrite its cookies), then clear them
+      window["ga-disable-" + id] = true;
+      if (window.gtag) gtag("consent", "update", { analytics_storage: "denied" });
+      wipe();
+      location.reload();
+    }
+  });
+}
+
+// GA4 events, sent only when Analytics is loaded (visitor accepted)
+const track = (name, params) => { if (window.gtag) gtag("event", name, params || {}); };
+
 function contactForm() {
   const form = $(".form");
   if (!form) return;
@@ -83,6 +137,7 @@ function contactForm() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.success) throw new Error(data.message || "HTTP " + res.status);
       form.dataset.state = "sent";
+      track("generate_lead", { form: "contact", language: document.documentElement.lang });
       form.reset();
     } catch (err) {
       console.warn("[contact form]", err);

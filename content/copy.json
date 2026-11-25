@@ -16,6 +16,10 @@
       { "name": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/alimentsjoeandray" },
       { "name": "Instagram", "icon": "instagram", "url": "https://www.instagram.com/alimjoeandray/" }
     ],
+    "ga4_id": "G-JQ5V6RXPCJ",
+    "google_site_verification": "nvdpJP9yOwcSlDyPttY3jAWyOK8gILvKpgcRsg1kwzI",
+    "_tracking_note": "Both carried over from the old WordPress site so Google Analytics history and Search Console ownership continue. Analytics loads only after a visitor accepts cookies, and only on the hosts in production_hosts (never on the sandbox).",
+    "production_hosts": ["alimentsjoeandray.com", "www.alimentsjoeandray.com"],
     "form_endpoint": "https://api.web3forms.com/submit",
     "form_access_key": "a0b1bf71-ea83-4c3b-9a6c-3a203b91f599",
     "_form_note": "Web3Forms. The access key is meant to be public (it only lets this form send to the inbox set up in Web3Forms). Messages go to the email address registered with that key."
@@ -421,6 +425,17 @@
       "Spices & seasonings": { "en": "Spices & seasonings", "fr": "Épices et assaisonnements" },
       "Spreads, jams & sweet toppings": { "en": "Spreads & sweet toppings", "fr": "Tartinades et garnitures sucrées" }
     }
+  },
+
+  "consent": {
+    "label": { "en": "Cookie consent", "fr": "Consentement aux témoins" },
+    "text": {
+      "en": "We use cookies for anonymous visitor statistics (Google Analytics) to improve this site. Nothing is collected unless you accept.",
+      "fr": "Nous utilisons des témoins (cookies) pour des statistiques de visite anonymes (Google Analytics) afin d’améliorer ce site. Rien n’est recueilli sans votre accord."
+    },
+    "accept": { "en": "Accept", "fr": "Accepter" },
+    "decline": { "en": "Decline", "fr": "Refuser" },
+    "manage": { "en": "Cookie preferences", "fr": "Préférences des témoins" }
   },
 
   "footer": {
