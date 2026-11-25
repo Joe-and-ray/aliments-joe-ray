@@ -21,6 +21,7 @@ LANGS = ("en", "fr")
 PATHS = {  # page -> lang -> URL path
     "home": {"en": "/", "fr": "/fr/"},
     "catalogue": {"en": "/product-catalogue/", "fr": "/fr/product-catalogue/"},
+    "privacy": {"en": "/privacy-policy/", "fr": "/fr/politique-de-confidentialite/"},
 }
 def v(path):
     """Cache-busting query string from file content."""
@@ -261,12 +262,12 @@ def footer(lang):
   </div>
   <div class="wrap foot-bottom">
     <span>© {S['founded']}–2026 {escape(S['legal'])}. {get("footer.rights", lang)}</span>
-    <span class="foot-bottom-links"><button class="link-btn" type="button" data-consent="open">{get("consent.manage", lang)}</button>
+    <span class="foot-bottom-links"><a href="{PATHS['privacy'][lang]}">{get("nav.privacy", lang)}</a><button class="link-btn" type="button" data-consent="open">{get("consent.manage", lang)}</button>
     <a href="{PATHS['home'][other]}" hreflang="{other}" lang="{other}">{get("nav.switch_lang", lang)}</a></span>
   </div>
 </footer>
 <div class="consent" id="consent" role="region" aria-label="{get('consent.label', lang)}" hidden>
-  <p>{get("consent.text", lang)}</p>
+  <p>{get("consent.text", lang)} <a href="{PATHS['privacy'][lang]}">{get("nav.privacy", lang)}</a></p>
   <div class="consent-actions">
     <button class="btn btn-ghost" type="button" data-consent="denied">{get("consent.decline", lang)}</button>
     <button class="btn btn-primary" type="button" data-consent="granted">{get("consent.accept", lang)}</button>
@@ -546,6 +547,7 @@ def home(lang):
             <span class="when-idle">{get("contact.send", lang)} {icon("send")}</span>
             <span class="when-sending">{get("contact.sending", lang)}</span>
           </button>
+          <p class="form-note full">{get("contact.form_note", lang)} <a href="{PATHS['privacy'][lang]}">{get("nav.privacy", lang)}</a></p>
           <p class="form-error" role="alert">{icon("alert")} {get("contact.error", lang)}</p>
         </div>
         <div class="form-sent" role="status">
@@ -646,6 +648,35 @@ def not_found():
     return h + header("en", "home") + body + footer("en")
 
 
+def md(text):
+    """Tiny Markdown for the legal pages: ## headings, - bullets, **bold**, `code`, paragraphs;
+    lines inside a paragraph keep their breaks (addresses)."""
+    inline = lambda t: re.sub(r"`([^`]+)`", r"<code>\1</code>", re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escape(t, quote=False)))
+    out = []
+    for block in re.split(r"\n\s*\n", text.strip()):
+        lines = block.splitlines()
+        if lines[0].startswith("## "):
+            out.append(f"<h2>{inline(lines[0][3:])}</h2>")
+        elif all(l.startswith("- ") for l in lines):
+            out.append("<ul>" + "".join(f"<li>{inline(l[2:])}</li>" for l in lines) + "</ul>")
+        else:
+            out.append("<p>" + "<br>".join(inline(l) for l in lines) + "</p>")
+    return "\n".join(out)
+
+
+def privacy(lang):
+    body = md((ROOT / f"content/privacy.{lang}.md").read_text(encoding="utf-8"))
+    page = f"""
+<section class="section legal">
+  <div class="wrap legal-wrap">
+    <h1>{get("nav.privacy", lang)}</h1>
+    {body}
+  </div>
+</section>"""
+    return (head(lang, "privacy", get("meta.privacy_title", lang), get("meta.privacy_description", lang))
+            + header(lang, "privacy") + page + footer(lang))
+
+
 # Cloudflare Pages / Workers read these two files from the deploy folder.
 HEADERS = """/*
   X-Content-Type-Options: nosniff
@@ -668,13 +699,13 @@ REDIRECTS = """/hello-world/ / 301
 /home/ / 301
 /accueil/ /fr/ 301
 """
-DEPLOY = ["index.html", "fr", "product-catalogue", "assets", "404.html", "sitemap.xml", "robots.txt"]
+DEPLOY = ["index.html", "fr", "product-catalogue", "privacy-policy", "assets", "404.html", "sitemap.xml", "robots.txt"]
 
 
 def main():
     out = []
     for lang in LANGS:
-        for page, fn in (("home", home), ("catalogue", catalogue)):
+        for page, fn in (("home", home), ("catalogue", catalogue), ("privacy", privacy)):
             p = ROOT / PATHS[page][lang].strip("/") / "index.html"
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(rebase(fn(lang)), encoding="utf-8")

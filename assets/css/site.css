@@ -468,6 +468,19 @@ details[open] .faq-icon { transform: rotate(45deg); background: var(--ink); bord
 .social a:hover { background: #fff; border-color: #fff; color: var(--green-800); }
 .social .i { width: 19px; height: 19px; }
 
+/* privacy policy (and any other legal page) */
+.legal-wrap { max-width: 760px; }
+.legal h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 24px; }
+.legal h2 { font-size: 1.35rem; margin: 40px 0 12px; }
+.legal p, .legal li { color: var(--body); }
+.legal p + p { margin-top: 12px; }
+.legal ul { margin: 12px 0; padding-left: 20px; list-style: disc; display: grid; gap: 6px; }
+.legal code { font-size: .9em; padding: 1px 5px; border-radius: 4px; background: var(--mist-grey); }
+.legal a { color: var(--green-800); }
+.form-note { font-size: .82rem; color: rgb(255 255 255 / .7); margin: 0; }
+.form-note a { color: #fff; }
+.consent p a { color: var(--green-800); }
+
 /* 404 */
 .not-found { min-height: 50vh; }
 .not-found h1 { font-size: clamp(2rem, 4vw, 3.2rem); }

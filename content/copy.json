@@ -34,6 +34,14 @@
       "en": "Family-owned importer and distributor in Saint-Léonard serving restaurants, pizzerias, caterers and retailers across Quebec with 2,000+ products. CFIA-licensed.",
       "fr": "Importateur et distributeur familial à Saint-Léonard au service des restaurants, pizzerias, traiteurs et détaillants du Québec. Plus de 2 000 produits. Licence de l’ACIA."
     },
+    "privacy_title": {
+      "en": "Privacy policy | Les Aliments Joe & Ray",
+      "fr": "Politique de confidentialité | Les Aliments Joe & Ray"
+    },
+    "privacy_description": {
+      "en": "How Les Aliments Joe & Ray collects, uses and protects personal information, in accordance with Quebec Law 25.",
+      "fr": "Comment Les Aliments Joe & Ray recueille, utilise et protège les renseignements personnels, conformément à la Loi 25 du Québec."
+    },
     "catalogue_title": {
       "en": "Product catalogue | Les Aliments Joe & Ray",
       "fr": "Catalogue de produits | Les Aliments Joe & Ray"
@@ -57,6 +65,7 @@
     "menu": { "en": "Menu", "fr": "Menu" },
     "close": { "en": "Close", "fr": "Fermer" },
     "skip": { "en": "Skip to content", "fr": "Passer au contenu" },
+    "privacy": { "en": "Privacy policy", "fr": "Politique de confidentialité" },
     "follow": { "en": "Follow us", "fr": "Suivez-nous" },
     "five_stars": { "en": "5 out of 5 stars", "fr": "5 étoiles sur 5" },
     "switch_lang": { "en": "Français", "fr": "English" }
@@ -379,7 +388,8 @@
     "sent_title": { "en": "Message sent.", "fr": "Message envoyé." },
     "sent_body": { "en": "Thanks. Our team will get back to you shortly.", "fr": "Merci. Notre équipe vous répondra sous peu." },
     "again": { "en": "Send another", "fr": "Envoyer un autre" },
-    "error": { "en": "That didn’t go through. Please call us at 514.729.6470.", "fr": "L’envoi a échoué. Appelez-nous au 514.729.6470." }
+    "error": { "en": "That didn’t go through. Please call us at 514.729.6470.", "fr": "L’envoi a échoué. Appelez-nous au 514.729.6470." },
+    "form_note": { "en": "We use your details only to reply to your request.", "fr": "Nous utilisons vos renseignements uniquement pour répondre à votre demande." }
   },
 
   "catalogue": {

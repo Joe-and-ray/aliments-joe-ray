@@ -75,6 +75,7 @@ Everything on `staging` goes live together. If the owner wants only some of it l
 | Every word on the site, EN + FR side by side | `content/copy.json` |
 | Phone numbers, address, fax, social links, form key, domain | `content/copy.json` → `site` |
 | The full product catalogue (≈1,000 products) | `content/catalogue.csv` |
+| Privacy policy text (EN, FR) | `content/privacy.en.md`, `content/privacy.fr.md` |
 | French names of catalogue categories | `content/copy.json` → `catalogue.categories` |
 | Photos | `assets/img/` (featured products in `assets/img/products/`, brand logos in `assets/img/brands/`) |
 | Colours, fonts, spacing, layout | `assets/css/site.css` (colour tokens at the top) |
@@ -132,6 +133,8 @@ The hero has two files: `hero-full.webp` (desktop) and `hero-mobile.jpg` (a 640�
 **New section or bigger redesign** → describe the plan first (where, what, both languages), wait for a yes, then build it in `build.py` + `site.css`, following the existing patterns.
 
 **Tracking (Google Analytics + Search Console)** → `site.ga4_id` (GA4 `G-JQ5V6RXPCJ`, carried over from the old site) and `site.google_site_verification` (keeps Search Console ownership). Analytics loads **only after a visitor clicks Accept** on the cookie card (Quebec Law 25), and only on `site.production_hosts` (never on the sandbox or locally). Events sent: `page_view` (automatic), `generate_lead` (contact form sent), `click_to_call` (phone link tapped). The footer's "Cookie preferences" link reopens the card. Don't add other trackers (Meta pixel, Hotjar, etc.) without the owner's OK; each one must also wait for consent. Never test by clicking Accept on the live domain repeatedly: every test is a real visit in their reports.
+
+**Privacy policy** → `content/privacy.en.md` and `content/privacy.fr.md` (pages `/privacy-policy/` and `/fr/politique-de-confidentialite/`; `##` headings, `-` bullets, `**bold**`). Required by Quebec Law 25 and linked from the footer, the cookie card and the contact form. Update both languages and the "Last updated" date whenever what the site collects changes: a new form field, a new tracker or a new service provider. Wording changes to the legal text need the owner's approval.
 
 **Contact form** → sends via Web3Forms (`site.form_endpoint`, `site.form_access_key`). Messages go to the email registered with that key. To change the receiving email, the owner changes it in their Web3Forms account; no code change. Never remove the hidden `botcheck` field (spam protection).
 
