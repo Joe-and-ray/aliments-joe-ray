@@ -89,8 +89,8 @@ To make a request, contact the person responsible below. We will respond in writ
 
 In accordance with Quebec Law 25, the person responsible for the protection of personal information at Les Aliments Joe & Ray Ltée is:
 
-[Name], [Title]
-[Email address]
+Jason Antonacci
+info@alimentsjoeandray.com
 514.729.6470
 
 ## Changes to this policy
@@ -104,4 +104,4 @@ For questions, requests or complaints about this Privacy Policy or how we handle
 Les Aliments Joe & Ray Ltée
 6506 P.E. Lamarche, St-Léonard, QC H1P 1J4
 514.729.6470
-[Email address]
+info@alimentsjoeandray.com

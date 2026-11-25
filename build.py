@@ -651,7 +651,8 @@ def not_found():
 def md(text):
     """Tiny Markdown for the legal pages: ## headings, - bullets, **bold**, `code`, paragraphs;
     lines inside a paragraph keep their breaks (addresses)."""
-    inline = lambda t: re.sub(r"`([^`]+)`", r"<code>\1</code>", re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escape(t, quote=False)))
+    inline = lambda t: re.sub(r"\b([\w.+-]+@[\w-]+\.[\w.]+)\b", r'<a href="mailto:\1">\1</a>',
+                              re.sub(r"`([^`]+)`", r"<code>\1</code>", re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escape(t, quote=False))))
     out = []
     for block in re.split(r"\n\s*\n", text.strip()):
         lines = block.splitlines()
